@@ -1,7 +1,10 @@
-import '../styles/globals.scss'
-import type { AppProps } from 'next/app'
+//type
+import { AppPropsWithLayout } from '../types/model'
 
-function MyApp({ Component, pageProps }: AppProps) {
+//style
+import '../styles/globals.scss'
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return <Component {...pageProps} />
 }
 
