@@ -28,14 +28,24 @@
     }
 
     .networks {
-      .icon {
+      display: flex;
+      a {
         width: 4rem;
         height: 4rem;
-        border-radius: 0.5rem;
-        padding: 0.6rem;
-        background-color: var(--heading-color);
-        color: var(--bg-card-color);
+        display: grid;
+        place-items: center;
         margin-inline: 0.5rem;
+        cursor: pointer;
+        border-radius: 50%;
+        border: 2px solid rgb(226, 221, 221);
+        color:  rgb(226, 221, 221);
+        font-size: 2rem;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color:  rgb(226, 221, 221);
+          color: #444;
+        }
       }
     }
   }

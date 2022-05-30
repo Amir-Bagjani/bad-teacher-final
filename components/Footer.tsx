@@ -45,11 +45,11 @@ const Footer = () => {
             </div>
   
             <div className={`${styles.box} ${styles.links}`}>
-                  <h3>دسترسی سریع</h3>
-                  <Link href="/">صفحه اصلی</Link>
-                  <Link href="/courses">دوره ها</Link>
-                  <Link href="/about">درباره من</Link>
-                  <Link href="/blogs">وبلاگ</Link>
+              <h3>دسترسی سریع</h3>
+              <Link href="/">صفحه اصلی</Link>
+              <Link href="/courses">دوره ها</Link>
+              <Link href="/about">درباره من</Link>
+              <Link href="/blogs">وبلاگ</Link>
             </div>
   
             <div className={`${styles.box} ${styles.contact}`}>
