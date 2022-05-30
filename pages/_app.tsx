@@ -3,6 +3,7 @@ import { AppPropsWithLayout } from '../types/model'
 
 //style
 import '../styles/globals.scss'
+import Footer from '../components/Footer';
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
@@ -13,6 +14,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     return (
     <>
       <Component {...pageProps} />
+      <Footer />
     </>
   );
 }
