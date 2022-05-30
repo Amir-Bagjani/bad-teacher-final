@@ -1,5 +1,5 @@
 @import "config";
-@import url("https://fonts.googleapis.com/css2?family=Allan&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Allan&display=swap");
 
 :root {
   --font-color: #555;
@@ -11,6 +11,7 @@
   --border: 0.1rem solid rgba(0, 0, 0, 0.2);
   --menu-border: 0.1rem solid rgba(61, 61, 61, 0.15);
   --main-color: #fe0000;
+  --yellow-color:rgb(255, 195, 86);
   --box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
   --max-width: 120rem;
   --font-family: IRANSans, Arial, Helvetica, sans-serif;
@@ -25,6 +26,7 @@
   --border: 0.1rem solid rgba(255, 255, 255, 0.2);
   --menu-border: 0.1rem solid rgba(205, 205, 205, 0.07);
 }
+
 
 * {
   margin: 0;
@@ -47,7 +49,8 @@ section {
   padding-top: 11rem;
 }
 i,
-svg {//icons
+svg {
+  //icons
   cursor: pointer;
 }
 a {
@@ -59,39 +62,63 @@ a {
 .wrapper {
   max-width: var(--max-width);
   margin-inline: auto;
+  font-family: var(--font-family);
 }
 .heading {
   margin-bottom: 5rem;
+  padding-right: 4rem;
+  position: relative;
+
+  &::after, &::before, .circle{
+    content: "";
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgb(255, 195, 86);
+  }
+  &::before{
+    top: 10px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .circle{
+    top: 20px;
+    right: -5px;
+    width: 14px;
+    height: 14px;
+    background-color: #c3b091;
+  }
 
   h2 {
     @include title-text(3rem);
     padding-bottom: 1rem;
-    text-decoration: underline var(--main-color) 4px;
   }
   p {
     @include grap-text(1.5rem);
     text-decoration: underline var(--main-color) 1px;
   }
 }
-.btn {
-  font-family: var(--font-family);
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.8rem 3rem;
-  border-radius: 5rem;
-  background: var(--main-color);
-  font-size: 1.7rem;
-  color: #fff;
-  cursor: pointer;
-  box-shadow: var(--box-shadow);
-  transition: transform 0.2s ease;
+.btn{
+    border-radius: 24px;
+    text-align: center;
+    padding: 10px 32px;
+    background-color: rgb(255, 195, 86);
+    color: rgb(25, 24, 23);
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: all 0.1s ease;
 
-  &:hover {
-    transform: scale(1.04);
+    &:hover {
+      background-color: rgb(252, 250, 238);
+      border-color: rgb(235, 232, 229);
+    }
   }
-}
 // .breadcrumbs {
-  // @include breadcrumbs;
+// @include breadcrumbs;
 // }
 
 //Scrollbar
@@ -106,7 +133,7 @@ a {
 //media queries
 @media (max-width: 991px) {
   html {
-    font-size: 55%;
+    font-size: 58%;
   }
 }
 @media (max-width: 768px) {

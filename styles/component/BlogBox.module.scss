@@ -1,0 +1,63 @@
+@import "styles/config";
+
+.box {
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: var(--box-shadow);
+  background-color: var(--bg-card-color);
+
+  .image {
+    height: 20rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .content {
+    padding: 2rem;
+
+    .icons {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1.5rem;
+      margin-bottom: 1rem;
+      border-bottom: var(--border);
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.5rem;
+        color: var(--heading-color);
+
+        &:hover {
+          color: var(--yellow-color);
+        }
+
+        .icon {
+          margin-top: -2px;
+          margin-right: 0.5rem;
+          font-size: 1.3rem;
+        }
+      }
+    }
+
+    h3 {
+      @include title-text(2rem);
+      padding: 0.5rem 0;
+      line-height: 1.8;
+    }
+
+    p {
+      @include grap-text(1.4rem);
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* number of lines to show */
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      margin-bottom: 2rem;
+    }
+  }
+}

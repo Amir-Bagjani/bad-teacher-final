@@ -1,0 +1,32 @@
+.mouse {
+  width: 25px;
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  display: flex;
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  .mouseWheel {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+    margin: auto;
+    animation: move 1.5s linear infinite;
+  }
+}
+
+@keyframes move {
+  0% {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+}

@@ -1,0 +1,50 @@
+@import "styles/config";
+
+.featuresContent {
+  .box {
+    background-color: rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+    width: 400px;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 5rem;
+    text-align: center;
+    cursor: grabbing;
+
+    &::before{
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: -105%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150%;
+      height: 150%;
+      border-radius: 50%;
+      background-color:rgba(255, 255, 255, 0.4);
+
+      @media (max-width: 767px) {
+        // top: -180%;
+      }
+    }
+
+    .icon {
+      font-size: 6rem;
+      color: var(--heading-color);
+    }
+
+    .content {
+      h3 {
+        @include title-text(2rem);
+        padding-bottom: 1.5rem;
+      }
+      p {
+        @include grap-text(1.5rem);
+      }
+    }
+  }
+}

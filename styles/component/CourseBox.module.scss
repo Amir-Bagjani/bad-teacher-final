@@ -1,0 +1,92 @@
+@import "styles/config";
+
+%d-flex {
+  display: flex;
+  align-items: center;
+}
+
+.box {
+
+  background-color: var(--bg-card-color);
+  border-radius: 1rem;
+  box-shadow: var(--box-shadow);
+
+  .image {
+    position: relative;
+    width: 92%;
+    margin-inline: auto;
+    height: 18rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-top: -5rem;
+    .img {
+      transition: transform 0.2s linear;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .content {
+    padding: 2rem;
+
+    h5 {
+      @include title-text(2rem);
+      padding-bottom: 1.5rem;
+    }
+
+    p {
+      @include grap-text(1.3rem);
+      overflow: hidden;
+      line-height: 2.7rem;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* number of lines to show */
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  .info {
+    @extend %d-flex;
+    padding: 1rem;
+
+    .icon {
+      @include title-text(2rem);
+      margin-right: 1rem;
+    }
+
+    .date {
+      @include title-text(1.5rem);
+      @extend %d-flex;
+      .icon {
+        margin-left: 0.5rem;
+      }
+    }
+
+    .price {
+      @include title-text(1.5rem);
+      margin-right: auto;
+    }
+  }
+
+  .footer {
+    @include title-text(1.5rem);
+    border-top: var(--border);
+    padding: 1.5rem;
+    color: #609cff;
+    .btn {
+      @extend %d-flex;
+      justify-content: center;
+      gap: 1rem;
+      transition: all 0.2s linear;
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      .icon {
+        font-size: 2.5rem;
+      }
+    }
+  }
+}
