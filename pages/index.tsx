@@ -14,6 +14,9 @@ import FeaturesSwip from '../components/FeaturesSwip'
 //style
 import styles from '../styles/page/Home.module.scss'
 
+//fetch data
+import { cartData } from '../fakeData/cartData'
+
 
 const Home: NextPageWithLayout = () => {
   return (
@@ -46,14 +49,13 @@ const Home: NextPageWithLayout = () => {
         <div className={styles.coursesContainer}>
 
           <div className={styles.container}>
-            <CourseBox />
-            <CourseBox />
-            <CourseBox />
-            <CourseBox />
+            {cartData.filter((_,ind) => ind <4).map(data => (
+              <CourseBox key={data.id} data={data} />
+            ))}
           </div>  
 
           <div className={styles.coursesBtn}>
-            <Link href="/"><a className="btn">همه دوره ها</a></Link>
+            <Link href="/courses"><a className="btn">همه دوره ها</a></Link>
           </div>
 
         </div>

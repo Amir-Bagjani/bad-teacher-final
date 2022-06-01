@@ -4,4 +4,6 @@ export interface Cart {
   image: string;
   title: string;
   body: string;
+  time: string;
+  popular: boolean;
 }

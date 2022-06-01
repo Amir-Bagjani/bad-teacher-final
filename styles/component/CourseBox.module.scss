@@ -6,7 +6,8 @@
 }
 
 .box {
-
+  display: flex;
+  flex-direction: column;
   background-color: var(--bg-card-color);
   border-radius: 1rem;
   box-shadow: var(--box-shadow);
@@ -19,6 +20,7 @@
     border-radius: 1rem;
     overflow: hidden;
     margin-top: -5rem;
+    border: var(--border);
     .img {
       transition: transform 0.2s linear;
       &:hover {
@@ -28,6 +30,7 @@
   }
 
   .content {
+    margin-bottom: auto;
     padding: 2rem;
 
     h5 {
