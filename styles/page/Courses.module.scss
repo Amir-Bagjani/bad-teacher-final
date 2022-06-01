@@ -15,18 +15,17 @@
       background-color: var(--bg-card-color);
 
       .image {
-        height: 20rem;
+        min-height: 20rem;
         width: 40%;
         overflow: hidden;
-        .img{
-          // top: -50% !important;
-        }
+        position: relative;
       }
       .content {
         width: 60%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        gap: 1.5rem;
         padding: 1rem;
         h3 {
           @include title-text(2.1rem);

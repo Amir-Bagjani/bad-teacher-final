@@ -7,24 +7,25 @@ import { BsBookmarkHeart } from "react-icons/bs";
 import { Cart } from "../types/cart";
 //style
 import styles from "../styles/component/CourseBox.module.scss";
+import { blurData } from "../util/blurImagePlaceholder";
 
 interface CourseBoxProps {
   data: Cart;
 }
 
-const CourseBox = ({data}: CourseBoxProps) => {
+const CourseBox = ({ data }: CourseBoxProps) => {
   return (
     <div className={styles.box}>
       <div className={styles.image}>
         <Image
           className={styles.img}
           src={data.image}
-          alt="course-image"
-          layout="responsive"
+          alt={data.title}
+          layout="fill"
           objectFit="cover"
-          width="100%"
-          height="100%"
-          priority={true}
+          placeholder="blur"
+          blurDataURL={blurData}
+          priority
         />
       </div>
       <div className={styles.content}>
@@ -37,13 +38,14 @@ const CourseBox = ({data}: CourseBoxProps) => {
           <span>{data.time}</span>
         </div>
         <BsBookmarkHeart className={styles.icon} />
-        <span className={styles.price}>{data.price.toLocaleString()}
+        <span className={styles.price}>
+          {data.price.toLocaleString()}
           <span className={styles.index}> تومان </span>
         </span>
       </div>
       <div className={styles.footer}>
-        <Link href={`/courses/${data.id}`}>
-          <a className={styles.btn}> 
+        <Link href={`/courses/${data.title}`}>
+          <a className={styles.btn}>
             مشاهده دوره <TiArrowLeftThick className={styles.icon} />
           </a>
         </Link>

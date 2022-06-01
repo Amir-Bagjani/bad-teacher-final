@@ -10,6 +10,7 @@ import { BsBookmarkHeart } from "react-icons/bs";
 import styles from "../../styles/page/Courses.module.scss";
 //fetch data
 import { cartData } from "../../fakeData/cartData";
+import { blurData } from "../../util/blurImagePlaceholder";
 
 const Courses = () => {
   return (
@@ -30,10 +31,10 @@ const Courses = () => {
                       className={styles.img}
                       src={data.image}
                       alt={data.title}
-                      width="100%"
-                      height="100%"
-                      layout="responsive"
+                      layout="fill"
                       objectFit="cover"
+                      placeholder="blur"
+                      blurDataURL={blurData}
                       priority
                     />
                   </div>
@@ -51,7 +52,7 @@ const Courses = () => {
                         <span className={styles.index}> تومان </span>
                       </span>
                     </div>
-                    <Link href={`/courses/${data.id}`}>
+                    <Link href={`/courses/${data.title}`}>
                       <a className={styles.viewCourseBtn}>مشاهده دوره</a>
                     </Link>
                   </div>

@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../styles/component/BlogBox.module.scss"
 import { FaRegCalendarAlt, FaRegUser } from "react-icons/fa";
+//style
+import styles from "../styles/component/BlogBox.module.scss"
+import { blurData } from "../util/blurImagePlaceholder";
 
 interface Blog {
     blog: {
@@ -20,10 +22,11 @@ const BlogBox: React.FC<Blog> = ({blog}) => {
                 className={styles.img}
                 src={blog.img} 
                 alt="blog"
-                layout="responsive"
+                layout="fill"
                 objectFit="cover"
-                width="100%"
-                height="100%"
+                placeholder="blur"
+                blurDataURL={blurData}
+                priority
             />
         </div>
         <div className={styles.content}>
