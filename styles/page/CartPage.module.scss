@@ -1,0 +1,105 @@
+@import "styles/config";
+
+
+.cartPage {
+    .heading{
+        margin-bottom: 0;
+    }
+    .cartPageContainer {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      
+      .cartPageSidebar {
+        flex: 3;
+        position: sticky;
+        top: 0.1rem;
+        box-shadow: var(--box-shadow);
+        background-color: var(--bg-card-color);
+        border-radius: 1rem;
+        padding: 1rem 2rem 3rem 2rem;
+        p{
+            @include grap-text(1.8rem);
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 2rem;
+        }
+        .discount{
+            border-bottom: var(--border);
+            margin-bottom: 2rem;
+        }
+      }
+      .cartPageContent {
+        flex: 7;
+        background-color: var(--bg-card-color);
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: var(--box-shadow);
+
+        .box{
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: var(--border);
+
+            &:last-child{
+                margin-bottom: 0;
+            }
+
+            .image{
+                width: 20rem;
+                height: 20rem;
+                border-radius: 0.5rem;
+                overflow: hidden;
+            }
+            .content{
+                h3{
+                    @include title-text(1.8rem);
+                    padding-bottom: 1rem;
+                }
+                p{
+                    @include grap-text(1.5rem);
+                    padding-bottom: 0.5rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+
+                    .icon{
+                        color: var(--yellow-color);
+                        font-size: 2rem;
+                    }
+                }
+                button{
+                    cursor: pointer;
+                    transform: scale(0.7);
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    .icon{
+                        font-size: 2.5rem;
+                    }
+                }
+            }
+        }
+
+        .emptyCart{
+            @include title-text(1.8rem);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+  
+      }
+    }
+}
+
+@media (max-width: 768px) {
+    .cartPage {
+      .cartPageContainer {
+        flex-direction: column;
+        align-items: unset;
+      }
+    }
+  }

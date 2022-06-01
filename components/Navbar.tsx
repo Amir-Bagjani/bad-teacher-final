@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
-
 //components
 import {
   Dispatch,
@@ -38,7 +37,8 @@ import useTheme from "../hooks/useTheme";
 
 //style
 import styles from "../styles/component/Navbar.module.scss";
-
+import { cartSelect } from "../redux/store";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [user, setUser] = useState(true);
@@ -108,7 +108,11 @@ const Navbar = () => {
           </li>
           <li className={styles.navbarLogo}>
             <div className={styles.img}>
-              <img loading="lazy" src="/images/logo.svg" alt="bad-teacher-logo" />
+              <img
+                loading="lazy"
+                src="/images/logo.svg"
+                alt="bad-teacher-logo"
+              />
             </div>
             <div className={styles.icons}>
               <a href="#">
@@ -211,7 +215,7 @@ const Navbar = () => {
   );
 };
 
-export default Navbar
+export default Navbar;
 
 // -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-//
 
@@ -235,6 +239,14 @@ const Icons = (props: IconProps) => {
     darkTheme,
   } = props;
   const userBox = useRef<any>();
+  const { quantity: countt } = useSelector(cartSelect);
+  
+  //prevent hydration
+  const [quantity, setQuantity] = useState(0);
+  //prevent hydration
+  useEffect(() => {
+    setQuantity(countt);
+  }, [countt]);
 
   //close drop-down when click outside the box
   useCloseDropDown(userBox, closeMenuState);
@@ -255,6 +267,7 @@ const Icons = (props: IconProps) => {
           <Link href="/cart">
             <a>
               <MdOutlineShoppingCart className={styles.icon} />{" "}
+              <span className={styles.count}>{quantity}</span>
             </a>
           </Link>
         </li>

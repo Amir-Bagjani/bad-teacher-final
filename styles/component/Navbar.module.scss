@@ -72,6 +72,10 @@
       li a {
         color: var(--heading-color);
       }
+      li::before,
+      li::after {
+        background-color: var(--heading-color);
+      }
     }
 
     a.navbarLogin {
@@ -89,8 +93,10 @@
     .icons {
       & > ul {
         color: var(--heading-color);
-        li .icon {
-          background-color: rgba(255, 255, 255, 0.4);
+        li {
+          .icon {
+            background-color: rgba(255, 255, 255, 0.4);
+          }
         }
       }
     }
@@ -114,6 +120,7 @@
       font-size: 1.6rem;
 
       li {
+        position: relative;
         &.navbarLogo,
         &.navbarCart {
           display: none;
@@ -126,9 +133,25 @@
         &.navbarClose {
           display: none;
         }
-        &:hover {
-          text-decoration: 0.2rem underline;
-          text-underline-offset: 0.8rem;
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -0.8rem;
+          left: 50%;
+          width: 0;
+          height: 2px;
+          background-color: #fff;
+          transition: all 0.2s ease;
+        }
+        &::before {
+          right: 50%;
+        }
+        &:hover::before {
+          width: 50%;
+        }
+        &:hover::after {
+          width: 50%;
         }
         .icon {
           display: none;
@@ -173,6 +196,19 @@
         position: relative;
         .icon {
           @extend %icon;
+        }
+        .count {
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          line-height: 20px;
+          text-align: center;
+          background-color: red;
+          color: #fff;
+          border-radius: 50%;
+          top: -7px;
+          right: -2px;
+          font-size: 1.5rem;
         }
       }
     }
@@ -257,11 +293,14 @@
               margin: -3rem auto 0 2rem;
             }
           }
-          &:hover {
-            text-decoration: none;
-          }
+          // &:hover {
+          //   text-decoration: none;
+          // }
           .icon {
             display: block;
+          }
+          &::after, &::before{
+            display: none;
           }
         }
       }
