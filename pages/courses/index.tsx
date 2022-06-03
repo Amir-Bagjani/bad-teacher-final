@@ -6,13 +6,16 @@ import Layout from "../../components/Layout";
 import Section from "../../components/Section";
 import { BiTime } from "react-icons/bi";
 import { BsBookmarkHeart } from "react-icons/bs";
+//types
+import { GetServerSideProps } from "next";
+import { Cart } from "../../types/cart";
 //style
 import styles from "../../styles/page/Courses.module.scss";
 //fetch data
-import { cartData } from "../../fakeData/cartData";
+import { cartData as courses } from "../../fakeData/cartData";
 import { blurData } from "../../util/blurImagePlaceholder";
 
-const Courses = () => {
+const Courses = ({courses}:{courses: Cart[]}) => {
   return (
     <Layout title="دوره ها">
       <main>
@@ -22,7 +25,7 @@ const Courses = () => {
           </Heading>
 
           <div className={styles.coursePopular}>
-            {cartData
+            {courses
               .filter((data) => data.popular)
               .map((data) => (
                 <div className={styles.courseBox} key={data.id}>
@@ -61,7 +64,7 @@ const Courses = () => {
           </div>
 
           <div className={styles.coursesContainer}>
-            {cartData
+            {courses
               .filter((data) => !data.popular)
               .map((data) => (
                 <CourseBox key={data.id} data={data} />
@@ -74,3 +77,11 @@ const Courses = () => {
 };
 
 export default Courses;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    props: {
+      courses,
+    },
+  };
+};

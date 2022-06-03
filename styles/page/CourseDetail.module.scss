@@ -7,6 +7,8 @@
     background-color: var(--bg-color);
     border-radius: 1rem 1rem 0 0;
     overflow: hidden;
+    width: 85%;
+    margin-inline: auto;
 
     .courseBox {
       box-shadow: var(--box-shadow);
