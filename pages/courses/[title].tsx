@@ -120,7 +120,6 @@ export default CourseDetail;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const course = cartData.filter((i) => i.title === params?.title)[0];
-  console.log(course);
 
   return {
     props: {

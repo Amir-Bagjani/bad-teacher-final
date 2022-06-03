@@ -1,0 +1,25 @@
+@import "styles/config";
+
+.breadcrumbs {
+  @include title-text(1.7rem);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background-color: var(--bg-card-color);
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  box-shadow: var(--box-shadow);
+  padding: 1rem;
+  .link {
+    border-radius: 0.5rem;
+    &:after {
+      content: "\203A";
+      margin-right: 1.5rem;
+    }
+    &:last-child{
+        cursor: pointer;
+    &::after {
+      content: "";
+    }
+  }}
+}

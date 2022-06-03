@@ -1,0 +1,132 @@
+@import "styles/config";
+
+.sectionContainer {
+  background-color: var(--bg-primary-color);
+  .container {
+    display: flex;
+    gap: 2rem;
+
+    .content {
+      flex: 7;
+      padding: 1rem;
+    }
+
+    .sidebar {
+      flex: 3;
+
+      .sidebarTop {
+        padding: 1rem;
+        border-radius: 1rem;
+        background-color: var(--bg-secondary-color);
+        margin-bottom: 2rem;
+
+        .title {
+          @include title-text(1.8rem);
+          margin-bottom: 2rem;
+        }
+
+        .box {
+          max-width: 40rem;
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+          height: 8rem;
+          border-radius: 1.5rem;
+          overflow: hidden;
+          margin-bottom: 1.5rem;
+          cursor: pointer;
+          &:hover {
+            background-color: var(--bg-primary-color);
+          }
+          .image {
+            position: relative;
+            width: 30%;
+            height: 10rem;
+          }
+          .link {
+            @include grap-text(1.3rem);
+            width: 70%;
+          }
+        }
+      }
+
+      .positionSticky {
+        position: sticky;
+        top: 1rem;
+
+        .sideLinks {
+          padding: 1rem;
+          border-radius: 1rem;
+          background-color: var(--bg-secondary-color);
+          margin-bottom: 2rem;
+
+          .title {
+            @include title-text(1.8rem);
+            margin-bottom: 2rem;
+          }
+
+          a {
+            @include grap-text(1.8rem);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            margin-right: 1rem;
+
+            .icon {
+              font-size: 2.5rem;
+            }
+
+            &:hover {
+              text-decoration: 2px underline;
+            }
+          }
+        }
+
+        .networks {
+          .network {
+            display: block;
+            cursor: pointer;
+            padding: 2rem 0;
+            margin-bottom: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+            color: #fff;
+            font-size: 2rem;
+
+            &.whatsapp {
+              background-color: #25d366;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 1rem;
+            }
+            &.youtube {
+              background-color: #ff0000;
+            }
+            &.instagram {
+              background: linear-gradient(
+                45deg,
+                #405de6,
+                #5851db,
+                #833ab4,
+                #c13584,
+                #e1306c,
+                #fd1d1d
+              );
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .sectionContainer {
+    .container {
+      flex-direction: column;
+      align-items: unset;
+    }
+  }
+}

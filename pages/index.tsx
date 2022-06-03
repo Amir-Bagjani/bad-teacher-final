@@ -68,10 +68,13 @@ const Home: NextPageWithLayout = () => {
           <h2>تازه ترین نوشته ها</h2>
         </Heading>
         <div  className={styles.container}>
-          {blogs.map(blog => (
+          {blogs.filter((_,ind) => ind < 3).map(blog => (
             <BlogBox key={blog.id} blog={blog} />
           ))}
         </div>
+        <div className={styles.blogsBtn}>
+            <Link href="/blogs"><a className="btn">همه نوشته ها</a></Link>
+          </div>
       </Section>
 
       </main>

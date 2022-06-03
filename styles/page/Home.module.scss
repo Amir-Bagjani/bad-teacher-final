@@ -70,6 +70,10 @@
   .container {
     @include grid(26rem, 1.5rem);
   }
+  .blogsBtn{
+    text-align: center;
+    margin-top: 3rem;
+  }
 }
 
 @media (max-width: 768px) {

@@ -1,0 +1,5 @@
+@import "styles/config";
+
+.container {
+  @include grid(30rem, 1.5rem);
+}
