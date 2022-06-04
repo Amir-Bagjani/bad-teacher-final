@@ -6,30 +6,27 @@
     display: flex;
     align-items: flex-start;
     gap: 2rem;
-    margin-top: 3rem;
 
     .content {
-      flex: 8;
+      flex: 7.5;
     }
 
     .sidebar {
-      flex: 2;
+      flex: 2.5;
       position: sticky;
       top: 1rem;
       border-radius: 1rem;
       background-color: var(--bg-color);
       box-shadow: var(--box-shadow);
-      padding: 2rem;
       h3 {
         text-align: center;
         @include title-text(2rem);
-        padding-bottom: 2rem;
-        margin-bottom: 2rem;
+        padding: 1.5rem;
         border-bottom: var(--border);
       }
       ul li .link {
         @include grap-text(1.5rem);
-        margin-bottom: 2rem;
+        padding: 1rem 2rem;
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -38,15 +35,18 @@
         .icon {
           font-size: 2.2rem;
         }
-        &:hover {
-          color: var(--yellow-color);
+        &:first-child {
+          margin-top: 0.2rem;
+        }
+        &.active{
+          background-color: var(--bg-primary-color);
         }
       }
     }
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 991px) {
   .sectionContainer {
     .container {
       flex-direction: column;
