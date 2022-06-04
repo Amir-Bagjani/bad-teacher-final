@@ -1,0 +1,59 @@
+@import "styles/config";
+
+.sectionContainer {
+  background-color: var(--bg-primary-color);
+  .container {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-top: 3rem;
+
+    .content {
+      flex: 8;
+    }
+
+    .sidebar {
+      flex: 2;
+      position: sticky;
+      top: 1rem;
+      border-radius: 1rem;
+      background-color: var(--bg-color);
+      box-shadow: var(--box-shadow);
+      padding: 2rem;
+      h3 {
+        text-align: center;
+        @include title-text(2rem);
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+        border-bottom: var(--border);
+      }
+      ul li .link {
+        @include grap-text(1.5rem);
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+        cursor: pointer;
+        .icon {
+          font-size: 2.2rem;
+        }
+        &:hover {
+          color: var(--yellow-color);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .sectionContainer {
+    .container {
+      flex-direction: column;
+      align-items: unset;
+      .sidebar {
+        position: unset;
+      }
+    }
+  }
+}

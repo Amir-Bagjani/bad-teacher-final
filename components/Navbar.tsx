@@ -41,7 +41,7 @@ import { cartSelect } from "../redux/store";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(true);
   const [menuState, setMenuState] = useState("");
 
   const router = useRouter();
@@ -81,10 +81,10 @@ const Navbar = () => {
           <Image
             src="/images/logo-2.svg"
             alt="bad-teacher-logo"
-            width="100%"
-            height="100%"
-            layout="responsive"
-            // onClick={() => setUser((u) => !u)}
+            layout="fill"
+            objectFit="contain"
+            priority
+            onClick={() => setUser((u) => !u)}
           />
         </a>
       </Link>
