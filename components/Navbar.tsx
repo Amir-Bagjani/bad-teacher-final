@@ -41,7 +41,7 @@ import { cartSelect } from "../redux/store";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
   const [menuState, setMenuState] = useState("");
 
   const router = useRouter();
