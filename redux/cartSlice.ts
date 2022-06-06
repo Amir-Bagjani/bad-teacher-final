@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Cart } from "../types/cart";
-import { cartData } from "../fakeData/cartData";
-import Cookies from 'js-cookie'
-
+import Cookies from "js-cookie";
 
 interface InitStat {
   cart: Cart[];
@@ -10,11 +8,6 @@ interface InitStat {
   total: number;
 }
 
-// const initialState: InitStat = {
-//   cart: cartData,
-//   quantity: 2,
-//   total: 1000000,
-// };
 const initialState: InitStat = Cookies.get("cart")
   ? JSON.parse(Cookies.get("cart")!)
   : {
