@@ -1,3 +1,4 @@
+//components
 import BlogsLayout from "../../components/BlogsLayout";
 import Layout from "../../components/Layout";
 import BlogBox from "../../components/BlogBox";

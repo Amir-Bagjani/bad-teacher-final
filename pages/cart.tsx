@@ -43,7 +43,6 @@ const Cart = () => {
                         objectFit="cover"
                         width="100%"
                         height="100%"
-                        priority
                       />
                     </div>
                     <div className={styles.content}>

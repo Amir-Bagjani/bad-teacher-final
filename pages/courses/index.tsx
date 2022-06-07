@@ -1,3 +1,4 @@
+//components
 import Image from "next/image";
 import Link from "next/link";
 import CourseBox from "../../components/CourseBox";
@@ -38,7 +39,6 @@ const Courses = ({courses}:{courses: Cart[]}) => {
                       objectFit="cover"
                       placeholder="blur"
                       blurDataURL={blurData}
-                      priority
                     />
                   </div>
                   <div className={styles.content}>

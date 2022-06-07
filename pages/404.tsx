@@ -1,24 +1,15 @@
+//components
 import Image from "next/image";
 import Link from "next/link";
-import React, { useCallback, useEffect, useRef } from "react";
 import Layout from "../components/Layout";
 import Section from "../components/Section";
-import styles from "../styles/page/NotFound.module.scss";
+//data
 import { blurData } from "../util/blurImagePlaceholder";
+//style
+import styles from "../styles/page/NotFound.module.scss";
 
 const NotFound = () => {
-  const numberRef = useRef({} as HTMLImageElement);
 
-  const move = useCallback((e: MouseEvent) => {
-    let x = (window.innerWidth / 2 - e.pageX) / 50;
-    let y = (window.innerHeight / 2 - e.pageY) / 50;
-    // numberRef.current.style.transform = `translateX(${x}px) translateY(${y}px)`;
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
-  }, []);
   return (
     <Layout title="صفحه پیدا نشد">
       <main>

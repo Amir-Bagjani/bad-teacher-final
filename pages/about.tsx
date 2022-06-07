@@ -1,13 +1,15 @@
 import { ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import useCloseDropDown from "../hooks/useCloseDropDown";
+//components
 import Link from "next/link";
+import Image from "next/image";
 import Layout from "../components/Layout";
-import styles from "../styles/page/About.module.scss";
 import { MdMenu, MdClose, MdPerson, MdDownload } from "react-icons/md";
 import { FaUserGraduate, FaRegEnvelope, FaPaperPlane } from "react-icons/fa";
 import { BsTelephone } from "react-icons/bs";
 import { FiMapPin } from "react-icons/fi";
-import Image from "next/image";
-import useCloseDropDown from "../hooks/useCloseDropDown";
+//style
+import styles from "../styles/page/About.module.scss";
 
 const About = () => {
   const [showMenu, setShowMenu] = useState(false);

@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Image from "next/image";
-
+import { useRouter } from "next/router";
 //components
 import {
   Dispatch,
@@ -30,13 +29,12 @@ import {
   AiOutlineInstagram,
   AiOutlineWhatsApp,
 } from "react-icons/ai";
-
 //hooks
 import useCloseDropDown from "../hooks/useCloseDropDown";
 import useTheme from "../hooks/useTheme";
-
 //style
 import styles from "../styles/component/Navbar.module.scss";
+//redux
 import { cartSelect } from "../redux/store";
 import { useSelector } from "react-redux";
 
@@ -83,7 +81,6 @@ const Navbar = () => {
             alt="bad-teacher-logo"
             layout="fill"
             objectFit="contain"
-            priority
             onClick={() => setUser((u) => !u)}
           />
         </a>

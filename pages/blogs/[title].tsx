@@ -1,15 +1,16 @@
+//components
+import Image from "next/image";
 import BlogsLayout from "../../components/BlogsLayout";
 import Layout from "../../components/Layout";
 import { GoCalendar } from "react-icons/go";
 //data
 import { blogs } from "../../fakeData/blogs";
+import { blurData } from "../../util/blurImagePlaceholder";
 //types
 import { GetServerSideProps } from "next";
 import { Blog } from "../../types/blog";
 //style
 import styles from "../../styles/page/BlogDetail.module.scss";
-import Image from "next/image";
-import { blurData } from "../../util/blurImagePlaceholder";
 
 const BlogDetail = ({ blog }: { blog: Blog }) => {
   return (
@@ -30,7 +31,6 @@ const BlogDetail = ({ blog }: { blog: Blog }) => {
               objectFit="cover"
               placeholder="blur"
               blurDataURL={blurData}
-              priority
             />
           </div>
         </div>

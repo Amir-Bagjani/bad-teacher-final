@@ -12,6 +12,7 @@ import { FaLock, FaMoneyBillWave, FaYoutube } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
 //styles
 import styles from "../../styles/page/CourseDetail.module.scss";
+//data
 import { cartData } from "../../fakeData/cartData";
 import { blurData } from "../../util/blurImagePlaceholder";
 
@@ -32,7 +33,6 @@ const CourseDetail = ({ course }: { course: Cart }) => {
                   objectFit="cover"
                   placeholder="blur"
                   blurDataURL={blurData}
-                  priority
                 />
               </div>
               <div className={styles.content}>

@@ -26,7 +26,6 @@ const BlogBox: React.FC<Blog> = ({ blog }) => {
           objectFit="cover"
           placeholder="blur"
           blurDataURL={blurData}
-          priority
         />
       </div>
       <div className={styles.content}>

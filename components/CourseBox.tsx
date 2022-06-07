@@ -57,7 +57,6 @@ const CourseBox = ({ data }: CourseBoxProps) => {
           objectFit="cover"
           placeholder="blur"
           blurDataURL={blurData}
-          priority
         />
       </div>
       <div className={styles.content}>

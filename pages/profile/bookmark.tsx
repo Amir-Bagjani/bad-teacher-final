@@ -1,6 +1,6 @@
-import dynamic from "next/dynamic";
 import useLocalStorage from "../../hooks/useLocalStorage";
 //components
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import Layout from "../../components/Layout";
 import ProfileLayout from "../../components/ProfileLayout";

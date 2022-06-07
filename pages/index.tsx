@@ -1,5 +1,4 @@
 import { NextPageWithLayout } from '../types/model'
-
 //components
 import Link from 'next/link'
 import Heading from '../components/Heading'
@@ -9,21 +8,20 @@ import BlogBox from '../components/BlogBox'
 import ScrollDownAnimation from '../components/ScrollDownAnimation'
 import CourseBox from '../components/CourseBox'
 import FeaturesSwip from '../components/FeaturesSwip'
-
 //style
 import styles from '../styles/page/Home.module.scss'
-
 //fetch data
 import { cartData } from '../fakeData/cartData'
 import { blogs } from '../fakeData/blogs'
 
 
 const Home: NextPageWithLayout = () => {
+
   return (
     <Layout title="صفحه اصلی">
       <main>
 
-      <Section id="hero" className={styles.hero}>
+      <Section  id="hero" className={styles.hero}>
         <ScrollDownAnimation />
         <div className={styles.heroContent}>
             <h1><span> آکادمی زبان </span> <br /> BAD TEACHER</h1>
