@@ -1,21 +1,45 @@
 @import "styles/config";
 
-.featuresContent {
+.boxContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .arrowRight {
+    position: absolute;
+    z-index: 10000;
+    top: calc(50% - 1.5rem);
+    right: 3rem;
+    font-size: 3rem;
+    color: var(--heading-color);
+    user-select: none;
+  }
+  .arrowLeft {
+    position: absolute;
+    z-index: 10000;
+    top: calc(50% - 1.5rem);
+    left: 3rem;
+    font-size: 3rem;
+    color: var(--heading-color);
+    user-select: none;
+  }
+
   .box {
     background-color: rgba(255, 255, 255, 0.1);
     position: relative;
     z-index: 0;
     overflow: hidden;
     backdrop-filter: blur(5px);
-    width: 400px;
+    width: 50vw;
+    max-width: 500px;
     border-radius: 1rem;
     padding: 1.5rem;
     box-shadow: var(--box-shadow);
-    margin-bottom: 5rem;
     text-align: center;
-    cursor: grabbing;
+    animation: move 0.2s linear;
 
-    &::before{
+    &::before {
       content: "";
       position: absolute;
       z-index: -1;
@@ -25,11 +49,7 @@
       width: 150%;
       height: 150%;
       border-radius: 50%;
-      background-color:rgba(255, 255, 255, 0.4);
-
-      @media (max-width: 767px) {
-        // top: -180%;
-      }
+      background-color: rgba(255, 255, 255, 0.4);
     }
 
     .icon {
@@ -46,5 +66,16 @@
         @include grap-text(1.5rem);
       }
     }
+  }
+}
+
+@keyframes move {
+  0% {
+    clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+    opacity: 0;
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 1;
   }
 }

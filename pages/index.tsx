@@ -1,5 +1,4 @@
 import { NextPageWithLayout } from '../types/model'
-import { blogs } from '../fakeData/blogs'
 
 //components
 import Link from 'next/link'
@@ -16,6 +15,7 @@ import styles from '../styles/page/Home.module.scss'
 
 //fetch data
 import { cartData } from '../fakeData/cartData'
+import { blogs } from '../fakeData/blogs'
 
 
 const Home: NextPageWithLayout = () => {
