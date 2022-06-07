@@ -1,0 +1,38 @@
+.loader {
+  position: fixed;
+  z-index: 1000000;
+  left: 0;
+  top: 0;
+  height: 5px;
+  width: 100%;
+  display: flex;
+}
+.loader > div {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.loader > div::before,
+.loader > div::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  height: 100%;
+  background-color: #ffc456;
+  animation: full 0.6s ease-in-out infinite alternate;
+}
+.loader > div::before {
+  right: 50%;
+}
+.loader > div::after {
+  left: 50%;
+}
+
+@keyframes full {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 50%;
+  }
+}

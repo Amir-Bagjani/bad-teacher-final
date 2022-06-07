@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { ReactNode } from "react";
+import Loader from "./Loader";
 
 const KEYWORDS =
   "Bad Teacher, English, English Course, English tutorial, آموزش زبان انگلیسی , پکیج آموزش انگلیسی";
@@ -32,6 +33,7 @@ const Layout = ({ title, keywords, description, children }: LayoutProps) => {
             : `آموزش زبان انگلیسی Bad Teacher`}
         </title>
       </Head>
+      <Loader />
       {children}
     </>
   );
