@@ -31,15 +31,17 @@ const Home: NextPageWithLayout = () => {
       </Section>
 
       <Section id="courses" className={styles.courses}>
-
         <Heading>
-            <h2>چرا آکادمی Bad Teacher؟</h2>
-            <p>آکادمی آموزشی Bad Teacher یک آکادمی خصوصی است</p>
+          <h2>چرا آکادمی Bad Teacher؟</h2>
+          <p>آکادمی آموزشی Bad Teacher یک آکادمی خصوصی است</p>
         </Heading>
+      </Section>
+
         <div className={styles.featuresContainer}>
           <FeaturesSwip />         
         </div>
 
+      <Section className={styles.courses}>
         <Heading>
             <h2>دوره ها</h2>
             <p>سکوی پرتاپ شما به سمت موفقیت</p>
