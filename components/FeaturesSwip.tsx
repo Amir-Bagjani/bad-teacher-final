@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { FaCrown, FaGem, FaCopyright, FaYoutube } from "react-icons/fa";
@@ -66,7 +67,6 @@ const FeaturesSwip = () => {
   );
 };
 
-export default FeaturesSwip;
 
 const SlideItem = ({ slideItem }: { slideItem: Slide[] }) => {
   const [current, setCurrent] = useState(0);
@@ -106,3 +106,6 @@ const SlideItem = ({ slideItem }: { slideItem: Slide[] }) => {
     </div>
   );
 };
+
+export default FeaturesSwip;
+// export default dynamic(() => Promise.resolve(FeaturesSwip), {ssr: false});

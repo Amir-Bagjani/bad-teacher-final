@@ -1,27 +1,24 @@
+import moment from "jalali-moment";
 import Image from "next/image";
 import Link from "next/link";
 import { FaRegCalendarAlt, FaRegUser } from "react-icons/fa";
+//type
+import { Entry } from "contentful";
+//data
+import { blurData } from "../util/blurImagePlaceholder";
 //style
 import styles from "../styles/component/BlogBox.module.scss";
-import { blurData } from "../util/blurImagePlaceholder";
 
-interface Blog {
-  blog: {
-    id: number;
-    img: string;
-    title: string;
-    body: string;
-  };
-}
+const BlogBox = ({ blog }: { blog: Entry<any> }) => {
+  const { title, slug, thumbnail, date, excerpt } = blog.fields;
 
-const BlogBox: React.FC<Blog> = ({ blog }) => {
   return (
     <div className={styles.box}>
       <div className={styles.image}>
         <Image
           className={styles.img}
-          src={blog.img}
-          alt={blog.title}
+          src={`https:${thumbnail.fields.file.url}`}
+          alt={blog.fields.title}
           layout="fill"
           objectFit="cover"
           placeholder="blur"
@@ -31,17 +28,19 @@ const BlogBox: React.FC<Blog> = ({ blog }) => {
       <div className={styles.content}>
         <div className={styles.icons}>
           <span>
-            <FaRegUser className={styles.icon} /> by user
+            <FaRegUser className={styles.icon} />
+            Bad Teacher
           </span>
           <span>
-            <FaRegCalendarAlt className={styles.icon} /> 1st may, 2020
+            <FaRegCalendarAlt className={styles.icon} />{" "}
+            {moment(date.split("T")[0]).locale("fa").format("YYYY/M/D")}
           </span>
         </div>
-        <h3>{blog.title}</h3>
-        <p>{blog.body}</p>
+        <h3>{title}</h3>
+        <p>{excerpt}</p>
       </div>
       <div className={styles.footer}>
-        <Link href={`/blogs/${blog.title}`}>
+        <Link href={`/blogs/${slug}`}>
           <a className={`${styles.link} btn`}>ادامه مطلب</a>
         </Link>
       </div>

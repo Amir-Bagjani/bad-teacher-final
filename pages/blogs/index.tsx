@@ -2,20 +2,20 @@
 import BlogsLayout from "../../components/BlogsLayout";
 import Layout from "../../components/Layout";
 import BlogBox from "../../components/BlogBox";
-//data
-import { blogs as blogsData } from "../../fakeData/blogs";
+import { client } from "../../util/contentful";
 //types
-import { GetServerSideProps } from "next";
-import { Blog } from "../../types/blog";
+import { GetStaticProps } from "next";
+import { Entry } from "contentful";
 //style
 import styles from "../../styles/page/Blogs.module.scss";
 
-const BlogsPage = ({ blogsData }: { blogsData: Blog[] }) => {
+const BlogsPage = ({ blogsData }: {blogsData: Entry<any>[]}) => {
+  
   return (
     <Layout title="بلاگ">
         <div className={styles.container}>
           {blogsData.map((data) => (
-            <BlogBox blog={data} key={data.id} />
+            <BlogBox blog={data} key={data.sys.id} />
           ))}
         </div>
     </Layout>
@@ -24,10 +24,15 @@ const BlogsPage = ({ blogsData }: { blogsData: Blog[] }) => {
 
 export default BlogsLayout(BlogsPage);
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  return {
+export const getStaticProps: GetStaticProps  = async () => {
+  const res = await client.getEntries({ content_type: "badTeacherBlog"})
+
+
+    return {
     props: {
-      blogsData: blogsData,
+      blogsData: res.items,
     },
+    revalidate: 10,
   };
+
 };

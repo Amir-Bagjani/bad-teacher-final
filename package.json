@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^15.12.1",
     "@reduxjs/toolkit": "^1.8.2",
     "@types/js-cookie": "^3.0.2",
+    "contentful": "^9.1.32",
     "formik": "^2.2.9",
+    "jalali-moment": "^3.3.11",
     "js-cookie": "^3.0.1",
     "next": "12.1.6",
     "react": "18.1.0",

@@ -3,6 +3,7 @@ import { ComponentType } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Section from "./Section";
+import Breadcrumbs from "./Breadcrumbs";
 import { BiHomeSmile } from "react-icons/bi";
 import { AiOutlineCrown, AiOutlineYoutube } from "react-icons/ai";
 import { MdOutlinePlayLesson } from "react-icons/md";
@@ -10,9 +11,9 @@ import { BsWhatsapp } from "react-icons/bs";
 //style
 import styles from "../styles/component/BlogsLayout.module.scss";
 //data
+import { cartData } from "../fakeData/cartData";
 import { blurData } from "../util/blurImagePlaceholder";
-import { blogs } from "../fakeData/blogs";
-import Breadcrumbs from "./Breadcrumbs";
+
 
 const BlogsLayout =
   (Component: ComponentType<any>) =>
@@ -29,13 +30,13 @@ const BlogsLayout =
             <div className={styles.sidebar}>
               <div className={styles.sidebarTop}>
                 <h3 className={styles.title}>محبوب ترین دوره ها</h3>
-                {blogs
+                {cartData
                   .filter((_, ind) => ind <= 3)
                   .map((data) => (
                     <div className={styles.box} key={data.id}>
                       <div className={styles.image}>
                         <Image
-                          src={data.img}
+                          src={data.image}
                           alt={data.title}
                           layout="fill"
                           objectFit="cover"

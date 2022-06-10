@@ -4,12 +4,13 @@ import Layout from "../../components/Layout";
 import ProfileLayout from "../../components/ProfileLayout";
 import { BsInstagram, BsYoutube } from "react-icons/bs";
 import { FaBell, FaBookOpen, FaCartPlus, FaGraduationCap, FaRegCalendarAlt, FaUserGraduate } from "react-icons/fa";
-//data
-import { blogs } from "../../fakeData/blogs";
 //style
 import styles from "../../styles/page/Profile.module.scss";
+import useGetBlogs from "../../hooks/useGetBlogs";
+import moment from "jalali-moment";
 
 const Profile = () => {
+  const { blogs } = useGetBlogs(4);
   return (
     <Layout>
       <div className={styles.container}>
@@ -77,14 +78,14 @@ const Profile = () => {
         <div className={styles.articles}>
             <FaBookOpen className={styles.icon} />
           
-          {blogs.map((i) => (
-            <div className={styles.box} key={i.id}>
+          {blogs?.map((blog) => (
+            <div className={styles.box} key={blog.sys.id}>
               <span>
                 <FaRegCalendarAlt className={styles.icon} />
-                {new Date().toLocaleDateString("fa-IR")}
+                {moment(blog.fields.date.split("T")[0]).locale("fa").format("YYYY/M/D")}
               </span>
-              <Link href={`/blogs/${i.title}`}>{i.title}</Link>
-              <p>{i.body}</p>
+              <Link href={`/blogs/${blog.fields.slug}`}>{blog.fields.title}</Link>
+              <p>{blog.fields.excerpt}</p>
             </div>
           ))}
         </div>

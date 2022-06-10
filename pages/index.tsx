@@ -1,3 +1,5 @@
+// import dynamic from 'next/dynamic'
+//type
 import { NextPageWithLayout } from '../types/model'
 //components
 import Link from 'next/link'
@@ -8,14 +10,19 @@ import BlogBox from '../components/BlogBox'
 import ScrollDownAnimation from '../components/ScrollDownAnimation'
 import CourseBox from '../components/CourseBox'
 import FeaturesSwip from '../components/FeaturesSwip'
+
+// const FeaturesSwip = dynamic(() => import('../components/FeaturesSwip'), {
+//   suspense: true,
+// })
 //style
 import styles from '../styles/page/Home.module.scss'
 //fetch data
+import useGetBlogs from '../hooks/useGetBlogs'
 import { cartData } from '../fakeData/cartData'
-import { blogs } from '../fakeData/blogs'
-
+import { Suspense } from 'react'
 
 const Home: NextPageWithLayout = () => {
+  const {blogs} = useGetBlogs(3);
 
   return (
     <Layout title="صفحه اصلی">
@@ -39,6 +46,9 @@ const Home: NextPageWithLayout = () => {
 
         <div className={styles.featuresContainer}>
           <FeaturesSwip />         
+          {/* <Suspense fallback={null}>
+            <FeaturesSwip />         
+          </Suspense> */}
         </div>
 
       <Section className={styles.courses}>
@@ -62,20 +72,20 @@ const Home: NextPageWithLayout = () => {
 
       </Section>
 
-      <Section id="blog"  className={styles.blog}>
+      {blogs && <Section id="blog"  className={styles.blog}>
 
         <Heading>
           <h2>تازه ترین نوشته ها</h2>
         </Heading>
         <div  className={styles.container}>
-          {blogs.filter((_,ind) => ind < 3).map(blog => (
-            <BlogBox key={blog.id} blog={blog} />
+          {blogs.map(blog => (
+            <BlogBox key={blog.sys.id} blog={blog} />
           ))}
         </div>
         <div className={styles.blogsBtn}>
             <Link href="/blogs"><a className="btn">همه نوشته ها</a></Link>
           </div>
-      </Section>
+      </Section>}
 
       </main>
     </Layout>
