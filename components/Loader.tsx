@@ -8,10 +8,10 @@ const Loader = () => {
 
   useEffect(() => {
     const startLoading = (url: string) => {
-      if (url !== router.asPath) setIsLoading(true);
+      if (url !== router.pathname || url !== router.query.slug) setIsLoading(true);
     };
     const finishLoading = (url: string) => {
-      if (url === router.asPath) setIsLoading(false);
+      if (url === router.pathname || url !== router.query.slug) setIsLoading(false);
     };
 
     router.events.on("routeChangeStart", startLoading);

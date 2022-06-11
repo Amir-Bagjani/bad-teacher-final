@@ -1,4 +1,6 @@
 import { ComponentType } from "react";
+import { useRouter } from "next/router";
+import useGetBlogs from "../hooks/useGetBlogs";
 //components
 import Image from "next/image";
 import Link from "next/link";
@@ -8,16 +10,17 @@ import { BiHomeSmile } from "react-icons/bi";
 import { AiOutlineCrown, AiOutlineYoutube } from "react-icons/ai";
 import { MdOutlinePlayLesson } from "react-icons/md";
 import { BsWhatsapp } from "react-icons/bs";
+//utils
+import { blurData } from "../util/blurImagePlaceholder";
 //style
 import styles from "../styles/component/BlogsLayout.module.scss";
-//data
-import { cartData } from "../fakeData/cartData";
-import { blurData } from "../util/blurImagePlaceholder";
-
 
 const BlogsLayout =
   (Component: ComponentType<any>) =>
   ({ ...props }) => {
+    const { blogs } = useGetBlogs(4);
+    const router = useRouter();
+
     return (
       <main>
         <Section className={styles.sectionContainer}>
@@ -29,28 +32,28 @@ const BlogsLayout =
 
             <div className={styles.sidebar}>
               <div className={styles.sidebarTop}>
-                <h3 className={styles.title}>محبوب ترین دوره ها</h3>
-                {cartData
-                  .filter((_, ind) => ind <= 3)
-                  .map((data) => (
-                    <div className={styles.box} key={data.id}>
-                      <div className={styles.image}>
-                        <Image
-                          src={data.image}
-                          alt={data.title}
-                          layout="fill"
-                          objectFit="cover"
-                          placeholder="blur"
-                          blurDataURL={blurData}
-                        />
-                      </div>
-                      <Link href={`/courses/${data.title}`}>
-                        <a className={styles.link}>
-                          <h3>{data.title}</h3>
-                        </a>
-                      </Link>
+                <h3 className={styles.title}>جدیدترین نوشته ها</h3>
+                {blogs?.map((blog) => (
+                  <div
+                    className={styles.box}
+                    key={blog.sys.id}
+                    onClick={() => router.push(`/blogs/${blog.fields.slug}`)}
+                  >
+                    <div className={styles.image}>
+                      <Image
+                        src={`https:${blog.fields.thumbnail.fields.file.url}`}
+                        alt={blog.fields.title}
+                        layout="fill"
+                        objectFit="cover"
+                        placeholder="blur"
+                        blurDataURL={blurData}
+                      />
                     </div>
-                  ))}
+                    <a className={styles.link}>
+                      <h3>{blog.fields.title}</h3>
+                    </a>
+                  </div>
+                ))}
               </div>
               <div className={styles.positionSticky}>
                 <div className={styles.sideLinks}>

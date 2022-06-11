@@ -4,10 +4,10 @@ import Layout from "../../components/Layout";
 import ProfileLayout from "../../components/ProfileLayout";
 import { BsInstagram, BsYoutube } from "react-icons/bs";
 import { FaBell, FaBookOpen, FaCartPlus, FaGraduationCap, FaRegCalendarAlt, FaUserGraduate } from "react-icons/fa";
-//style
-import styles from "../../styles/page/Profile.module.scss";
 import useGetBlogs from "../../hooks/useGetBlogs";
 import moment from "jalali-moment";
+//style
+import styles from "../../styles/page/Profile.module.scss";
 
 const Profile = () => {
   const { blogs } = useGetBlogs(4);
