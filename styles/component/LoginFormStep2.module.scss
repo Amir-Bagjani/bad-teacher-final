@@ -1,0 +1,49 @@
+@import "styles/config";
+
+.container {
+  .formStep2 {
+    input[type="text"] {
+      font-family: var(--font-family);
+      border: var(--border);
+      background-color: transparent;
+      height: 5rem;
+      border-radius: 0.5rem;
+      margin-inline: 0.5rem;
+      text-align: center;
+      font-size: 2rem;
+    }
+  }
+
+  button[type="submit"] {
+    font-family: var(--font-family);
+    width: 100%;
+    margin: 3rem 0;
+    background-color: transparent;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size: 1.8rem;
+    cursor: pointer;
+    background-color: var(--main-color);
+    color: #fff;
+  }
+
+  p {
+    @include title-text(1.5rem);
+    margin-bottom: 2rem;
+
+    &.error {
+      margin-top: 2rem;
+      margin-bottom: 0;
+      @include title-text(1rem);
+      color: red;
+      text-align: right;
+    }
+  }
+
+  & > .icon {
+    position: absolute;
+    top: 5rem;
+    left: 2rem;
+    font-size: 3rem;
+  }
+}
