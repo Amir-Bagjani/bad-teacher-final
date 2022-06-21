@@ -1,6 +1,12 @@
-import Head from "next/head";
 import { ReactNode } from "react";
+import { useRouter } from "next/router";
+import { useAuthIsReady } from "../hooks/useFetchUser";
+//components
+import Head from "next/head";
 import Loader from "./Loader";
+//redux
+import { useSelector } from "react-redux";
+import { UserSelect } from "../redux/store";
 
 const KEYWORDS =
   "Bad Teacher, English, English Course, English tutorial, آموزش زبان انگلیسی , پکیج آموزش انگلیسی";
@@ -16,6 +22,19 @@ interface LayoutProps {
 }
 
 const Layout = ({ title, keywords, description, children }: LayoutProps) => {
+  const { user } = useSelector(UserSelect);
+  const router = useRouter();
+
+  //check if session exists
+  useAuthIsReady();
+
+  //check if username exist
+  // useEffect(() => {
+  //   if (user && user?.isValid === false) {
+  //     router.replace("/profile/edit-account");
+  //   }
+  // }, [user, router]);
+
   return (
     <>
       <Head>

@@ -2,27 +2,27 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { request } from "../utils/axios-util";
 import Cookies from "js-cookie";
+//react-query
+import { useMutation } from "react-query";
 //redux
 import { useDispatch } from "react-redux";
 import { logoutUser, loginUser, authIsReady } from "../redux/userSlice";
-//react-query
-import { useMutation, useQuery } from "react-query";
 
 export const useSendPhoneNumber = () => {
-  return useMutation<any, any, any>((phoneNumber: any) =>
+  return useMutation((phoneNumber: { phoneNumber: string }) =>
     request({ url: `/phone-validate`, method: "post", data: phoneNumber })
   );
 };
 
 export const useLogin = () => {
   const dispatch = useDispatch();
-  return useMutation<any, any, any>(
-    (cedentials: any) => request({ url: `/phone-validate`, method: "post", data: cedentials }),
+  return useMutation(
+    (cedentials: { phoneNumber: string; smsToken: string }) =>
+      request({ url: `/phone-validate`, method: "post", data: cedentials }),
     {
       onSuccess: (data) => {
-        if(data){
-          const token = data.headers["x-auth-token"]        
-          console.log(data);
+        if (data) {
+          const token = data.headers["x-auth-token"];
           Cookies.set("token", token, {
             sameSite: "strict",
             path: "/",
@@ -39,9 +39,9 @@ export const useLogin = () => {
 export const useLogout = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  
+
   const logout = () => {
-    Cookies.remove('token')
+    Cookies.remove("token");
     dispatch(logoutUser());
     router.push("/");
   };
@@ -74,12 +74,11 @@ export const useAuthIsReady = () => {
 
   useEffect(() => {
     const token = Cookies.get("token");
-
     if (token) {
       const refresh = async () => {
-        const res = await request({ url: "/users/me" });
+        const res = await request({ url: "/me"});
         dispatch(
-          authIsReady({ isValid: true, name: "", email: "", ...res.data })
+          authIsReady(res.data)
         );
       };
       refresh();
