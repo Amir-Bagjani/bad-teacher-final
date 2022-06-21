@@ -1,12 +1,15 @@
-import Image from "next/image";
-import Link from "next/link";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import { getSession } from "../utils/getSession";
+import dynamic from "next/dynamic";
 
 //component
-import { BiTrash } from "react-icons/bi";
-import { BsCheck2Circle } from "react-icons/bs";
+import Image from "next/image";
+import Link from "next/link";
 import Heading from "../components/Heading";
 import Layout from "../components/Layout";
 import Section from "../components/Section";
+import { BiTrash } from "react-icons/bi";
+import { BsCheck2Circle } from "react-icons/bs";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
@@ -15,7 +18,6 @@ import { removeFromCart } from "../redux/cartSlice";
 
 //style
 import styles from "../styles/page/CartPage.module.scss";
-import dynamic from "next/dynamic";
 
 const discount = 5;
 
@@ -102,3 +104,23 @@ const Cart = () => {
 };
 
 export default dynamic(() => Promise.resolve(Cart), {ssr: false});
+
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const auth = await getSession(context);
+
+  if (!auth) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {
+      },
+    };
+  }
+};

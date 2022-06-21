@@ -1,11 +1,13 @@
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import { getSession } from "../../utils/getSession";
+import useGetBlogs from "../../hooks/useGetBlogs";
+import moment from "jalali-moment";
 //components
 import Link from "next/link";
 import Layout from "../../components/Layout";
 import ProfileLayout from "../../components/ProfileLayout";
 import { BsInstagram, BsYoutube } from "react-icons/bs";
 import { FaBell, FaBookOpen, FaCartPlus, FaGraduationCap, FaRegCalendarAlt, FaUserGraduate } from "react-icons/fa";
-import useGetBlogs from "../../hooks/useGetBlogs";
-import moment from "jalali-moment";
 //style
 import styles from "../../styles/page/Profile.module.scss";
 
@@ -95,3 +97,23 @@ const Profile = () => {
 };
 
 export default ProfileLayout(Profile);
+
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const auth = await getSession(context);
+
+  if (!auth) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {
+      },
+    };
+  }
+};

@@ -23,6 +23,7 @@ export const useLogin = () => {
       onSuccess: (data) => {
         if (data) {
           const token = data.headers["x-auth-token"];
+          Cookies.remove("token");
           Cookies.set("token", token, {
             sameSite: "strict",
             path: "/",
@@ -56,7 +57,7 @@ export const useEditAuth = () => {
       request({ url: "/update-user", method: "put", data: credentials }),
     {
       onSuccess: (data) => {
-        if(data){
+        if(data.data){
           dispatch(loginUser(data.data));
         }
       },
@@ -72,9 +73,7 @@ export const useAuthIsReady = () => {
     if (token) {
       const refresh = async () => {
         const res = await request({ url: "/me"});
-        dispatch(
-          authIsReady(res.data)
-        );
+        dispatch( authIsReady(res.data));
       };
       refresh();
     } else {

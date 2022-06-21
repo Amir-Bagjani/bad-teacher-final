@@ -1,37 +1,41 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { useEditAuth } from "../../hooks/useFetchUser";
+import { getSession } from "../../utils/getSession";
 //components
 import Layout from "../../components/Layout";
 import ProfileLayout from "../../components/ProfileLayout";
 import { MdEmail, MdPerson } from "react-icons/md";
-//redux
-import { UserSelect } from "../../redux/store";
-import { useSelector } from "react-redux";
 //style
 import styles from "../../styles/page/ProfileEditAccount.module.scss";
 
-//  -> TODO -  should implement with Formik <-  //
+//  -> TODO -  must implement with Formik <-  //
 
 const EditAccount = () => {
-  const nameRef = useRef({} as HTMLInputElement);
-  const emailRef = useRef({} as HTMLInputElement);
+  const [name,setName] = useState("");
+  const [email,setEmail] = useState("");  
 
   const { mutate: send, isLoading, isError, isSuccess } = useEditAuth();
 
   const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (nameRef.current.value && emailRef.current.value) {
-      send({name: nameRef.current.value, email: emailRef.current.value})
+    console.log({name, email});
+    
+
+    if (name && email) {
+      send({name, email})
+    }else{
+      console.log("in ejra mishe");
     }
-  }, []);
+  }, [name, email]);
 
   useEffect(() => {
     if(isSuccess){
-      emailRef.current.value = "";
-      nameRef.current.value = "";
+      setName("");
+      setEmail("");
     }
   }, [isSuccess])
+
 
   return (
     <Layout>
@@ -42,9 +46,8 @@ const EditAccount = () => {
               <input
                 type="text"
                 placeholder="نام خود را وارد کنید"
-                ref={nameRef}
-                value={nameRef.current.value}
-                onChange={(e) => (nameRef.current.value = e.target.value)}
+                value={name || ""}
+                onChange={(e) => setName(e.target.value)}
               />
               <MdPerson className={styles.icon} />
             </label>
@@ -52,9 +55,8 @@ const EditAccount = () => {
               <input
                 type="email"
                 placeholder="ایمیل خود را وارد کنید"
-                ref={emailRef}
-                value={emailRef.current.value}
-                onChange={(e) => (emailRef.current.value = e.target.value)}
+                value={email || ""}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <MdEmail className={styles.icon} />
             </label>
@@ -84,38 +86,23 @@ const EditAccount = () => {
 
 export default ProfileLayout(EditAccount);
 
-// const getSession = async (context: GetServerSidePropsContext) => {
-//   const cookie = context?.req.cookies || "";
-//   if (!cookie.token) {
-//     return false;
-//   } else {
-//     const res = await request({ url: "/users/me" });
-//     if (cookie.token === res.header["x-auth-token"]) {
-//       return { ...res.data };
-//     } else {
-//       return false;
-//     }
-//   }
-// };
 
-// export const getServerSideProps: GetServerSideProps = async (
-//   context: GetServerSidePropsContext
-// ) => {
-//   const cookie = context.req.cookies || "";
-//   const auth = await getSession(context);
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const auth = await getSession(context);
 
-//   if (!auth) {
-//     return {
-//       redirect: {
-//         destination: "/",
-//         permanent: false,
-//       },
-//     };
-//   } else {
-//     return {
-//       props: {
-//         user: auth,
-//       },
-//     };
-//   }
-// };
+  if (!auth) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {
+      },
+    };
+  }
+};

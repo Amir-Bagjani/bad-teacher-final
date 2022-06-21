@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getSession } from "../../utils/getSession";
 //components
 import Link from "next/link";
 import CourseBox from "../../components/CourseBox";
@@ -8,6 +9,7 @@ import ProfileLayout from "../../components/ProfileLayout";
 import { cartData } from "../../fakeData/cartData";
 //type
 import { Cart } from "../../types/cart";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 //style
 import styles from "../../styles/page/ProfilePurchasedCourses.module.scss";
 
@@ -36,3 +38,23 @@ const PurchasedCourses = () => {
 };
 
 export default ProfileLayout(PurchasedCourses);
+
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const auth = await getSession(context);
+
+  if (!auth) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {
+      },
+    };
+  }
+};

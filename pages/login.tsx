@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { UserSelect } from "../redux/store";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import { getSession } from "../utils/getSession";
 //components
 import Image from "next/image";
 import Layout from "../components/Layout";
@@ -75,21 +76,22 @@ Login.getLayout = (page: ReactElement) => {
   return <>{page}</>;
 };
 
-// export const getServerSideProps: GetServerSideProps = async (
-//   context: GetServerSidePropsContext
-// ) => {
-//   const cookie = context.req.cookies || "";
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const auth = await getSession(context);
 
-//   if(cookie.token) {
-//     return {
-//       redirect:{
-//         destination: "/",
-//         permanent: false
-//       }
-//     }
-//   }
-
-//   return{
-//     props: {}
-//   }
-// };
+  if (!auth) {
+    return {
+      props: {
+      },
+    };
+  } else {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+};

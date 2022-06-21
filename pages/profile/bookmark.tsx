@@ -1,4 +1,5 @@
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { getSession } from "../../utils/getSession";
 //components
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -7,12 +8,13 @@ import ProfileLayout from "../../components/ProfileLayout";
 import CourseBox from "../../components/CourseBox";
 //type
 import { Cart } from "../../types/cart";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 //style
 import styles from "../../styles/page/ProfileBookmark.module.scss";
 
 const Bookmark = () => {
   const [bookmark] = useLocalStorage<Cart[]>("bookmark", []);
-
+ 
   return (
     <Layout>
       <div className={styles.container}>
@@ -37,3 +39,23 @@ const Bookmark = () => {
 export default dynamic(() => Promise.resolve(ProfileLayout(Bookmark)), {
   ssr: false,
 });
+
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const auth = await getSession(context);
+
+  if (!auth) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {
+      },
+    };
+  }
+};
