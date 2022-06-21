@@ -51,19 +51,14 @@ export const useLogout = () => {
 
 export const useEditAuth = () => {
   const dispatch = useDispatch();
-  return useMutation<any, any, any>(
-    (credentials: any) =>
-      request({ url: "update-user", method: "put", data: credentials }),
+  return useMutation(
+    (credentials: { name: string; email: string }) =>
+      request({ url: "/update-user", method: "put", data: credentials }),
     {
       onSuccess: (data) => {
-        dispatch(
-          loginUser({
-            isValid: true,
-            name: "aa",
-            email: "a@gmail.com",
-            ...data.data,
-          })
-        );
+        if(data){
+          dispatch(loginUser(data.data));
+        }
       },
     }
   );
