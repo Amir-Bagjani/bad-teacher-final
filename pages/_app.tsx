@@ -5,22 +5,37 @@ import { AppPropsWithLayout } from "../types/model";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
-//style
-import "../styles/globals.scss";
+//redux
 import { Provider } from "react-redux";
 import { store } from "../redux/store";
 
+//style
+import "../styles/globals.scss";
+
+import { QueryClient, QueryClientProvider } from "react-query";
+
+// Create a client
+const queryClient = new QueryClient();
+
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   if (Component.getLayout) {
-    return Component.getLayout(<Component {...pageProps} />);
+    return Component.getLayout(
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
+      </QueryClientProvider>
+    );
   }
 
   return (
-    <Provider store={store}>
-      <Navbar />
-      <Component {...pageProps} />
-      <Footer />
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <Navbar />
+        <Component {...pageProps} />
+        <Footer />
+      </Provider>
+    </QueryClientProvider>
   );
 }
 

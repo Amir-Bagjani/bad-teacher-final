@@ -1,6 +1,14 @@
 import useCountdown from "../hooks/useCountDown";
+//types
+import { Dispatch, SetStateAction } from "react";
+import { Area } from "../pages/login";
 
-const LoginCounter = ({ targetDate }: any) => {
+interface Props {
+  targetDate: number;
+  setArea: Dispatch<SetStateAction<Area>>
+}
+
+const LoginCounter: React.FC<Props> = ({ targetDate, setArea }) => {
   const [minutes, seconds] = useCountdown(targetDate);
   
   let expire = minutes + seconds <= 0;
@@ -9,7 +17,10 @@ const LoginCounter = ({ targetDate }: any) => {
     return (
       <p style={{ fontSize: 15 }}>
         کدی دریافت نکردید؟
-        <strong style={{ color: `red`, cursor: "pointer"}}> ارسال مجدد </strong>
+        <strong 
+          style={{ color: `red`, cursor: "pointer"}}
+          onClick={() => setArea(Area.step1)}
+        > ارسال مجدد </strong>
       </p>
     );
   }

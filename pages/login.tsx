@@ -1,4 +1,8 @@
-import { useState, ReactElement } from "react";
+import { useState, ReactElement, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { UserSelect } from "../redux/store";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 //components
 import Image from "next/image";
 import Layout from "../components/Layout";
@@ -16,7 +20,23 @@ export enum Area {
 }
 
 const Login = () => {
+  const { user } = useSelector(UserSelect);
   const [area, setArea] = useState<Area>(Area.step1);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const router = useRouter();
+
+  //redirect user to previous route
+  useEffect(() => {
+    if (user) {
+      if (
+        router.query &&
+        router.query.from &&
+        typeof router.query.from === "string"
+      ) {
+        router.push(router.query.from);
+      }
+    }
+  }, [user]);
 
   return (
     <Layout>
@@ -28,12 +48,17 @@ const Login = () => {
             width={200}
             height={200}
           />
-          {area === "step1" && <LoginFormStep1 setArea={setArea} />}
+          {area === "step1" && (
+            <LoginFormStep1 setArea={setArea} setPhoneNumber={setPhoneNumber} />
+          )}
           {area === "step2" && (
             <>
-              <LoginFormStep2 setArea={setArea} />
-              {/*count down for 2 seconds*/}
-              <LoginCounter targetDate={new Date().getTime() + 120 * 1000} />
+              <LoginFormStep2 setArea={setArea} phoneNumber={phoneNumber} />
+              {/*count down for 130 seconds*/}
+              <LoginCounter
+                targetDate={new Date().getTime() + 130 * 1000}
+                setArea={setArea}
+              />
             </>
           )}
         </div>
@@ -49,3 +74,22 @@ export default Login;
 Login.getLayout = (page: ReactElement) => {
   return <>{page}</>;
 };
+
+// export const getServerSideProps: GetServerSideProps = async (
+//   context: GetServerSidePropsContext
+// ) => {
+//   const cookie = context.req.cookies || "";
+
+//   if(cookie.token) {
+//     return {
+//       redirect:{
+//         destination: "/",
+//         permanent: false
+//       }
+//     }
+//   }
+
+//   return{
+//     props: {}
+//   }
+// };

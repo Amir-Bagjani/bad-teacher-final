@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useCallback } from "react";
+import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 import { useFormik, FormikProps, FormikHelpers } from "formik";
 import * as Yup from "yup";
 //icon
@@ -7,6 +7,7 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import { Area } from "../pages/login";
 //style
 import styles from "../styles/component/LoginFormStep1.module.scss";
+import { useSendPhoneNumber } from "../hooks/useFetchUser";
 
 //form step 1
 type ValuesStep1 = Yup.InferType<typeof validationSchema1>;
@@ -25,20 +26,25 @@ const validationSchema1 = Yup.object({
 
 const LoginFormStep1 = ({
   setArea,
+  setPhoneNumber,
 }: {
   setArea: Dispatch<SetStateAction<Area>>;
+  setPhoneNumber: Dispatch<SetStateAction<string>>;
 }) => {
-    
+  const {
+    mutate: send,
+    isLoading,
+    isError,
+    isSuccess,
+  } = useSendPhoneNumber();
+
   //form step one
   const formS1: FormikProps<ValuesStep1> = useFormik<ValuesStep1>({
     initialValues: initialValuesStep1,
     onSubmit: (values, { setSubmitting }: FormikHelpers<ValuesStep1>) => {
-      setTimeout(() => {
-        console.log(values);
-        initialValuesStep1.phoneNumber = values.phoneNumber;
-        setArea(Area.step2);
-        setSubmitting(false);
-      }, 500);
+      setPhoneNumber(values.phoneNumber);
+      send(values);
+      setSubmitting(false);
     },
     validationSchema: validationSchema1,
   });
@@ -51,7 +57,11 @@ const LoginFormStep1 = ({
     if (!value || regex.test(value)) {
       formS1.setFieldValue("phoneNumber", value);
     }
-  }, []);
+  }, [formS1]);
+
+  useEffect(() => {
+    if (isSuccess) setArea(Area.step2);
+  }, [isSuccess, setArea]);
 
   return (
     <div className={styles.container}>
@@ -72,7 +82,17 @@ const LoginFormStep1 = ({
         {formS1.errors.phoneNumber && formS1.touched.phoneNumber && (
           <p className={styles.error}>{formS1.errors.phoneNumber}</p>
         )}
-        <input type="submit" value="تایید" />
+        {isError && <p className={styles.error}>ارتباط ناموفق بود لطفا دوباره امتحان کنید</p>}
+        <input
+          type="submit"
+          disabled={isLoading}
+          value={isLoading ? "صبر کنید..." : "تایید"}
+          style={
+            isLoading
+              ? { color: `gray`, backgroundColor: `lightgray` }
+              : undefined
+          }
+        />
       </form>
     </div>
   );

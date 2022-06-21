@@ -25,6 +25,11 @@
     cursor: pointer;
     background-color: var(--main-color);
     color: #fff;
+
+    &:disabled{
+      background-color: lightgray;
+      color: gray
+    }
   }
 
   p {
