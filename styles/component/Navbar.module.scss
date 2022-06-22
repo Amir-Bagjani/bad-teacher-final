@@ -171,6 +171,7 @@
     transition: all 0.1s ease;
     border: 2px solid #fff;
     color: #fff;
+    cursor: pointer;
 
     &:hover {
       color: #000;
@@ -268,9 +269,6 @@
             display: block;
             .img {
               text-align: center;
-              img {
-                height: 13rem;
-              }
             }
             .icons {
               display: flex;
@@ -295,9 +293,6 @@
               margin: -3rem auto 0 2rem;
             }
           }
-          // &:hover {
-          //   text-decoration: none;
-          // }
           .icon {
             display: block;
           }

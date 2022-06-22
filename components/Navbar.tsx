@@ -1,7 +1,3 @@
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
-//components
 import {
   Dispatch,
   SetStateAction,
@@ -10,6 +6,13 @@ import {
   useRef,
   useState,
 } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
+//redux
+import { cartSelect, UserSelect } from "../redux/store";
+import { useSelector } from "react-redux";
+//components
 import {
   MdOutlineShoppingCart,
   MdMenu,
@@ -34,14 +37,19 @@ import useCloseDropDown from "../hooks/useCloseDropDown";
 import useTheme from "../hooks/useTheme";
 //style
 import styles from "../styles/component/Navbar.module.scss";
-//redux
-import { cartSelect } from "../redux/store";
-import { useSelector } from "react-redux";
+
+interface IconProps {
+  menuState: string;
+  setMenuState: Dispatch<SetStateAction<string>>;
+  closeMenuState: () => void;
+  theme: string;
+  lightTheme: () => void;
+  darkTheme: () => void;
+}
 
 const Navbar = () => {
-  const [user, setUser] = useState(true);
+  const { user, userIsReady } = useSelector(UserSelect);
   const [menuState, setMenuState] = useState("");
-
   const router = useRouter();
   const { theme, lightTheme, darkTheme } = useTheme();
 
@@ -51,7 +59,11 @@ const Navbar = () => {
 
   const conditionCloseMenu = useCallback((e: React.MouseEvent<HTMLElement>) => {
     if (e.target === e.currentTarget) closeMenuState();
-  }, []);
+  }, [closeMenuState]);
+
+  const routerPush = useCallback(() => {
+    router.push({pathname: '/login', query: { from: router.pathname }})
+  }, [router]);
 
   //close menu when location change
   useEffect(() => {
@@ -65,6 +77,9 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", closeMenuState);
   }, [closeMenuState]);
 
+  if(!userIsReady) return null;
+
+
   return (
     <header
       className={
@@ -75,13 +90,11 @@ const Navbar = () => {
     >
       <Link href="/">
         <a className={styles.logo}>
-          {/*[TODO] remove onClick on production mode*/}
           <Image
             src="/images/logo-2.svg"
             alt="bad-teacher-logo"
             layout="fill"
             objectFit="contain"
-            onClick={() => setUser((u) => !u)}
           />
         </a>
       </Link>
@@ -100,16 +113,12 @@ const Navbar = () => {
         onClick={conditionCloseMenu}
       >
         <ul>
-          <li className={styles.navbarClose} onClick={closeMenuState}>
-            <MdClose className={styles.icon} />
+          <li className={styles.navbarClose}>
+            <MdClose className={styles.icon} onClick={closeMenuState} />
           </li>
           <li className={styles.navbarLogo}>
             <div className={styles.img}>
-              <img
-                loading="lazy"
-                src="/images/logo.svg"
-                alt="bad-teacher-logo"
-              />
+              <Image src="/images/logo.svg" alt="bad-teacher-logo" width="160px" height="160px" />
             </div>
             <div className={styles.icons}>
               <a href="#">
@@ -186,14 +195,10 @@ const Navbar = () => {
 
       {!user && (
         <>
-          <Link href="/login">
-            <a className={styles.navbarLogin}>ورود / ثبت نام</a>
-          </Link>
-          <Link href="/login">
-            <a className={styles.navbarLoginMobile}>
-              <BiUser className={styles.icon} />
-            </a>
-          </Link>
+          <a className={styles.navbarLogin} onClick={routerPush}>ورود / ثبت نام</a>
+          <a className={styles.navbarLoginMobile} onClick={routerPush}>
+            <BiUser className={styles.icon} />
+          </a>
         </>
       )}
 
@@ -216,16 +221,6 @@ export default Navbar;
 
 // -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-//
 
-//left side of navbar
-interface IconProps {
-  menuState: string;
-  setMenuState: Dispatch<SetStateAction<string>>;
-  closeMenuState: () => void;
-  theme: string;
-  lightTheme: () => void;
-  darkTheme: () => void;
-}
-
 const Icons = (props: IconProps) => {
   const {
     menuState,
@@ -236,14 +231,14 @@ const Icons = (props: IconProps) => {
     darkTheme,
   } = props;
   const userBox = useRef<any>();
-  const { quantity: countt } = useSelector(cartSelect);
+  const { quantity } = useSelector(cartSelect);
   
   //prevent hydration
-  const [quantity, setQuantity] = useState(0);
+  const [hydrationQuantity, setQuantity] = useState(0);
   //prevent hydration
   useEffect(() => {
-    setQuantity(countt);
-  }, [countt]);
+    setQuantity(quantity);
+  }, [quantity]);
 
   //close drop-down when click outside the box
   useCloseDropDown(userBox, closeMenuState);
@@ -264,7 +259,7 @@ const Icons = (props: IconProps) => {
           <Link href="/cart">
             <a>
               <MdOutlineShoppingCart className={styles.icon} />{" "}
-              <span className={styles.count}>{quantity}</span>
+              <span className={styles.count}>{hydrationQuantity}</span>
             </a>
           </Link>
         </li>
