@@ -2,12 +2,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "../styles/component/Breadcrumbs.module.scss";
 
-
-
 const Breadcrumbs = () => {
   const router = useRouter();
-  const { title } = router.query;
-
+  // const slug = "baba vil kona";
+  const slug = router?.query?.slug !;
 
   return (
     <div className={styles.breadcrumbs}>
@@ -19,7 +17,9 @@ const Breadcrumbs = () => {
         <a className={styles.link}>بلاگ</a>
       </Link>
 
-      {title && <span className={styles.link}>{title}</span>}
+      {typeof slug === "string" && (
+        <span className={styles.link}>{slug.replaceAll("-", " ")}</span>
+      )}
     </div>
   );
 };

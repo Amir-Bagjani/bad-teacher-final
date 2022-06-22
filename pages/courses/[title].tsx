@@ -14,7 +14,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import styles from "../../styles/page/CourseDetail.module.scss";
 //data
 import { cartData } from "../../fakeData/cartData";
-import { blurData } from "../../util/blurImagePlaceholder";
+import { blurData } from "../../utils/blurImagePlaceholder";
 
 const CourseDetail = ({ course }: { course: Cart }) => {
   const dispatch = useDispatch();

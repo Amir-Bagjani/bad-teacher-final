@@ -5,7 +5,7 @@ import { FaRegCalendarAlt, FaRegUser } from "react-icons/fa";
 //type
 import { Entry } from "contentful";
 //data
-import { blurData } from "../util/blurImagePlaceholder";
+import { blurData } from "../utils/blurImagePlaceholder";
 //style
 import styles from "../styles/component/BlogBox.module.scss";
 

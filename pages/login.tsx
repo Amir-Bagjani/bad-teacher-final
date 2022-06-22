@@ -37,7 +37,7 @@ const Login = () => {
         router.push(router.query.from);
       }
     }
-  }, [user]);
+  }, [user, router]);
 
   return (
     <Layout>

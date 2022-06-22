@@ -19,9 +19,6 @@ const EditAccount = () => {
 
   const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({name, email});
-    
-
     if (name && email) {
       send({name, email})
     }else{

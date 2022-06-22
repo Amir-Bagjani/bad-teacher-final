@@ -8,8 +8,8 @@ import BlogsLayout from "../../components/BlogsLayout";
 import Layout from "../../components/Layout";
 import { GoCalendar } from "react-icons/go";
 //data
-import { blurData } from "../../util/blurImagePlaceholder";
-import { client } from "../../util/contentful";
+import { blurData } from "../../utils/blurImagePlaceholder";
+import { client } from "../../utils/contentful";
 //types
 import { GetStaticPaths, GetStaticProps } from "next";
 import { Entry, TagLink } from "contentful";

@@ -23,10 +23,6 @@
     @extend %d-flex;
     justify-content: space-between;
 
-    & > img {
-      width: 20rem;
-    }
-
     .networks {
       display: flex;
       a {

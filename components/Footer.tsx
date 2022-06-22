@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { BsInstagram, BsWhatsapp, BsYoutube } from "react-icons/bs";
 import styles from "../styles/component/Footer.module.scss"
@@ -9,7 +10,7 @@ const Footer = () => {
         <div className="wrapper">
   
           <div className={styles.footerHeader}>
-            <img src="/images/logo.svg" loading="lazy" alt="bad-teacher-logo" />
+            <Image src="/images/logo.svg" alt="bad-teacher-logo" height="200px" width="200px" />
             <div className={styles.networks}>
               <a>
                 <BsWhatsapp className={styles.icon} />

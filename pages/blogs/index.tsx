@@ -2,7 +2,7 @@
 import BlogsLayout from "../../components/BlogsLayout";
 import Layout from "../../components/Layout";
 import BlogBox from "../../components/BlogBox";
-import { client } from "../../util/contentful";
+import { client } from "../../utils/contentful";
 //types
 import { GetStaticProps } from "next";
 import { Entry } from "contentful";

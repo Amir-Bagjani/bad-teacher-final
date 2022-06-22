@@ -4,7 +4,7 @@ import Link from "next/link";
 import Layout from "../components/Layout";
 import Section from "../components/Section";
 //data
-import { blurData } from "../util/blurImagePlaceholder";
+import { blurData } from "../utils/blurImagePlaceholder";
 //style
 import styles from "../styles/page/NotFound.module.scss";
 

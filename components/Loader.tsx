@@ -23,7 +23,7 @@ const Loader = () => {
       router.events.off("routeChangeComplete", finishLoading);
       router.events.off("routeChangeError", finishLoading);
     };
-  }, []);
+  }, [router.pathname, router.query.slug, router.events]);
 
   return (
     <>

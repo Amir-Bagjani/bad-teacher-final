@@ -14,7 +14,7 @@ import { Cart } from "../../types/cart";
 import styles from "../../styles/page/Courses.module.scss";
 //fetch data
 import { cartData as courses } from "../../fakeData/cartData";
-import { blurData } from "../../util/blurImagePlaceholder";
+import { blurData } from "../../utils/blurImagePlaceholder";
 
 const Courses = ({courses}:{courses: Cart[]}) => {
   return (

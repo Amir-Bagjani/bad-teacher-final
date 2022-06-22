@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Entry } from "contentful";
-import { client } from "../util/contentful";
+import { client } from "../utils/contentful";
 
 const useGetBlogs = (limit: number) => {
   const [blogs, setBlogs] = useState<Entry<any>[] | null>(null);

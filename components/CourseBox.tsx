@@ -4,7 +4,7 @@ import Link from "next/link";
 import { BiTime } from "react-icons/bi";
 import { TiArrowLeftThick } from "react-icons/ti";
 import { BsBookmarkHeart, BsFillBookmarkHeartFill } from "react-icons/bs";
-import { blurData } from "../util/blurImagePlaceholder";
+import { blurData } from "../utils/blurImagePlaceholder";
 //type
 import { Cart } from "../types/cart";
 //style
@@ -44,7 +44,7 @@ const CourseBox = ({ data }: CourseBoxProps) => {
       //return true if course was bookmarked and false if it was not
       setIsBookmarked(localState.some((i: Cart) => i.id === data.id));
     }
-  }, []);
+  }, [data.id]);
 
   return (
     <div className={styles.box}>

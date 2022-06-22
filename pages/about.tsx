@@ -93,7 +93,7 @@ const About = () => {
         <section className={styles.home} id="home">
           <h3>HI THERE !</h3>
           <h1>
-            I'M <span>Sina Baba Ahmadi</span>
+            I&#x27;M <span>Sina Baba Ahmadi</span>
           </h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
@@ -297,7 +297,8 @@ const About = () => {
 
         {scrollTop && (
           <a href="#home" className={styles.top}>
-            <img src="/images/scroll-top-img.png" />
+            {/* <img src="/images/scroll-top-img.png" alt="" /> */}
+            <Image src="/images/scroll-top-img.png" alt="" width="50" height="50" />
           </a>
         )}
       </main>
