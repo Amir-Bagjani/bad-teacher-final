@@ -16,10 +16,18 @@ const LoginPageFooter = () => {
       <a href="#">
         <BsYoutube style={style} />
       </a>
-      <a href="#">
+      <a
+        href="https://www.instagram.com/7bad4teacher7"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <BsInstagram style={style} />
       </a>
-      <a href="#">
+      <a
+        href="https://wa.me/+989301010747"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <BsWhatsapp style={style} />
       </a>
       <div style={{marginTop: `1rem`, fontSize: `1.5rem`, color: `gray` }}>

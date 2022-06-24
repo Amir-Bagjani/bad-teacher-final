@@ -89,11 +89,21 @@ const BlogSidebar = () => {
         </div>
 
         <div className={styles.networks}>
-          <a className={`${styles.network} ${styles.whatsapp}`}>
+          <a
+            className={`${styles.network} ${styles.whatsapp}`}
+            href="https://wa.me/+989301010747"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             0912-111-4567
             <BsWhatsapp className={styles.icon} />
           </a>
-          <a className={`${styles.network} ${styles.instagram}`}>
+          <a 
+            className={`${styles.network} ${styles.instagram}`}
+            href="https://www.instagram.com/7bad4teacher7"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             اینستاگرام ما را دنبال کنید
           </a>
           <a className={`${styles.network} ${styles.youtube}`}>

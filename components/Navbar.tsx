@@ -33,6 +33,7 @@ import {
   AiOutlineWhatsApp,
 } from "react-icons/ai";
 //hooks
+import { useLogout } from "../hooks/useFetchUser";
 import useCloseDropDown from "../hooks/useCloseDropDown";
 import useTheme from "../hooks/useTheme";
 //style
@@ -121,10 +122,18 @@ const Navbar = () => {
               <Image src="/images/logo.svg" alt="bad-teacher-logo" width="160px" height="160px" />
             </div>
             <div className={styles.icons}>
-              <a href="#">
+              <a
+                href="https://www.instagram.com/7bad4teacher7"
+                target="_blank"
+                rel="noopener noreferrer" 
+              >
                 <AiOutlineInstagram className={styles.icon} />
               </a>
-              <a href="#">
+              <a
+                href="https://wa.me/+989301010747"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <AiOutlineWhatsApp className={styles.icon} />
               </a>
               <a href="#">
@@ -230,8 +239,11 @@ const Icons = (props: IconProps) => {
     lightTheme,
     darkTheme,
   } = props;
-  const userBox = useRef<any>();
+  const userBox = useRef(null);
   const { quantity } = useSelector(cartSelect);
+  const { user } = useSelector(UserSelect);
+  const { logout } = useLogout();
+
   
   //prevent hydration
   const [hydrationQuantity, setQuantity] = useState(0);
@@ -277,10 +289,16 @@ const Icons = (props: IconProps) => {
               <li>
                 <BiUser className={styles.icon} />{" "}
                 <span>
-                  سینا پدر احمدی <br /> 09391111234
+                  {user?.name ? user.name : (<>
+                    لطفا{" "}
+                    <Link href="/profile/edit-account">
+                      <a style={{display: 'inline-block', color:`var(--main-color)`}}> - نام - </a>
+                    </Link>{" "}
+                    خود را وارد کنید
+                  </>)} <br /> {user?.nationalFormatPhone}
                 </span>
               </li>
-              <li>
+              <li onClick={logout}>
                 <Link href="/profile">
                   <a>
                     <AiOutlineBank className={styles.icon} />{" "}
@@ -296,7 +314,7 @@ const Icons = (props: IconProps) => {
                   </a>
                 </Link>
               </li>
-              <li>
+              <li onClick={logout}>
                 <Link href="">
                   <a>
                     <MdLogout className={styles.icon} />{" "}

@@ -43,12 +43,16 @@ const Profile = () => {
         <div className={styles.networks}>
           <h4>مارا در شبکه های اجتماعی دنبال کنید</h4>
           <div className={styles.links}>
-            <a href="#">
-                <BsInstagram className={styles.iconInstagram} /> اینستاگرام
-            </a>
-            <a href="#">
-                <BsYoutube className={styles.iconYoutube} /> کانال یوتیوب
-            </a>
+          <a
+            href="https://www.instagram.com/7bad4teacher7"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <BsInstagram className={styles.iconInstagram} /> اینستاگرام
+          </a>
+          <a href="#">
+            <BsYoutube className={styles.iconYoutube} /> کانال یوتیوب
+          </a>
           </div>
         </div>
 

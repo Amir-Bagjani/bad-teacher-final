@@ -8,7 +8,7 @@ const useCloseDropDown = <R extends HTMLElement, C extends Function>(
   //close drop-down when click outside the box
   useEffect(() => {
     const clickOutSide = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) callback();
+      if (ref.current && (!ref.current.contains(e.target as Node))) callback();
     };
 
     window.addEventListener("click", clickOutSide, true);
