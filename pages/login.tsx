@@ -1,8 +1,8 @@
 import { useState, ReactElement, useEffect } from "react";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { UserSelect } from "../redux/store";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { getSession } from "../utils/getSession";
 //components
 import Image from "next/image";

@@ -1,0 +1,1 @@
+export const REG_DIGIT = new RegExp(/^\d+$/);

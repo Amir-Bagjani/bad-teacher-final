@@ -9,7 +9,7 @@ const style: React.CSSProperties = {
 
 const LoginPageFooter = () => {
   return (
-    <div style={{textAlign: "center",marginTop: 0, marginBottom: `6rem` }}>
+    <div style={{textAlign: "center",marginTop: 0, marginBottom: `5rem` }}>
       <p style={{ marginBottom: `1.5rem`, fontSize: `1.3rem`, color: `gray` }}>
          Bad Teacher
       </p>
