@@ -3,7 +3,7 @@ import { BsInstagram, BsWhatsapp, BsYoutube } from "react-icons/bs";
 
 const style: React.CSSProperties = {
   width: `4rem`,
-  fontSize: `3rem`,
+  fontSize: `2rem`,
   color: `gray`,
 };
 

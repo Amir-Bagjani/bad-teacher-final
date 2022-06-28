@@ -39,12 +39,12 @@ export const useLogin = () => {
 
 export const useLogout = () => {
   const dispatch = useDispatch();
-  const router = useRouter();
-
+  const router = useRouter()
   const logout = () => {
     Cookies.remove("token");
     dispatch(logoutUser());
-    router.push("/");
+
+    router.reload()
   };
 
   return { logout };
@@ -73,6 +73,7 @@ export const useAuthIsReady = () => {
     if (token) {
       const refresh = async () => {
         const res = await request({ url: "/me"});
+        console.log(res.data);
         dispatch( authIsReady(res.data));
       };
       refresh();

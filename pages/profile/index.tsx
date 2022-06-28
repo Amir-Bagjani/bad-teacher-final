@@ -8,11 +8,15 @@ import Layout from "../../components/Layout";
 import ProfileLayout from "../../components/ProfileLayout";
 import { BsInstagram, BsYoutube } from "react-icons/bs";
 import { FaBell, FaBookOpen, FaCartPlus, FaGraduationCap, FaRegCalendarAlt, FaUserGraduate } from "react-icons/fa";
+//redux
+import { UserSelect } from "../../redux/store";
+import { useSelector } from "react-redux";
 //style
 import styles from "../../styles/page/Profile.module.scss";
 
 const Profile = () => {
   const { blogs } = useGetBlogs(4);
+  const { user } = useSelector(UserSelect)
   return (
     <Layout>
       <div className={styles.container}>
@@ -27,7 +31,7 @@ const Profile = () => {
           <div className={styles.box}>
           <FaUserGraduate className={styles.icon} />
             <div className={styles.content}>
-              <h4>5 دوره</h4>
+              <h4>{user?.courses.length} دوره</h4>
               <p>ثبت نام کرده اید</p>
             </div>
           </div>
@@ -110,7 +114,7 @@ export const getServerSideProps: GetServerSideProps = async (
   if (!auth) {
     return {
       redirect: {
-        destination: "/",
+        destination: "/login",
         permanent: false,
       },
     };

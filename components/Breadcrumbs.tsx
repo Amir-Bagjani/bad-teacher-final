@@ -4,7 +4,6 @@ import styles from "../styles/component/Breadcrumbs.module.scss";
 
 const Breadcrumbs = () => {
   const router = useRouter();
-  // const slug = "baba vil kona";
   const slug = router?.query?.slug !;
 
   return (

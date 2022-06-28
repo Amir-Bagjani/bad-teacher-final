@@ -25,16 +25,16 @@ const Login = () => {
   const [area, setArea] = useState<Area>(Area.step1);
   const [phoneNumber, setPhoneNumber] = useState("");
   const router = useRouter();
+  const { redirect } = router.query;
 
   //redirect user to previous route
   useEffect(() => {
     if (user) {
-      if (
-        router.query &&
-        router.query.from &&
-        typeof router.query.from === "string"
-      ) {
-        router.push(router.query.from);
+      if(typeof redirect === "string"){
+        router.push(redirect || '/');
+      }
+      else{
+        router.push('/');
       }
     }
   }, [user, router]);

@@ -78,12 +78,12 @@
       }
     }
 
-    a.navbarLogin {
+    .navbarLogin {
       color: var(--heading-color);
       border-color: var(--heading-color);
     }
 
-    a.navbarLoginMobile {
+    .navbarLoginMobile {
       color: var(--heading-color);
       .icon {
         background-color: rgba(255, 255, 255, 0.4);
@@ -122,8 +122,7 @@
 
       li {
         position: relative;
-        &.navbarLogo,
-        &.navbarCart {
+        &.navbarLogo {
           display: none;
           border-bottom: var(--menu-border);
         }
@@ -161,7 +160,7 @@
     }
   }
 
-  a.navbarLogin {
+  .navbarLogin {
     border-radius: 24px;
     text-align: center;
     padding: 10px 32px;
@@ -180,7 +179,7 @@
     }
   }
 
-  a.navbarLoginMobile {
+  .navbarLoginMobile {
     display: none;
     position: absolute;
     top: 3rem;
@@ -231,6 +230,7 @@
     width: max-content;
     li {
       margin-bottom: 0.5rem;
+      cursor: pointer;
       &:first-child {
         border-bottom: var(--menu-border);
         padding-bottom: 1rem;
@@ -296,16 +296,17 @@
           .icon {
             display: block;
           }
-          &::after, &::before{
+          &::after,
+          &::before {
             display: none;
           }
         }
       }
     }
-    a.navbarLogin {
+    .navbarLogin {
       display: none;
     }
-    a.navbarLoginMobile {
+    .navbarLoginMobile {
       display: block;
     }
     .icons > ul {
@@ -326,8 +327,7 @@
 @media (max-width: 580px) {
   .header {
     .navbar ul li {
-      &.navbarTheme,
-      &.navbarCart {
+      &.navbarTheme {
         display: block;
       }
     }
