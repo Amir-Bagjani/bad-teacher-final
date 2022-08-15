@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const client = axios.create({ baseURL: "http://localhost:8080/api/users" });
+const client = axios.create({ baseURL: process.env.NEXT_PUBLIC_AXIOS_BASE_URL });
 
 export const request = ({ ...options }: { [x: string]: any }) => {
   const token = Cookies.get("token");

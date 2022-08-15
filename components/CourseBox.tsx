@@ -71,7 +71,7 @@ const CourseBox = ({ data }: CourseBoxProps) => {
         {isBookmarked ? (
           <BsFillBookmarkHeartFill
             className={styles.icon}
-            style={{ color: `red` }}
+            style={{ color: `crimson` }}
             onClick={() => removeBookmark(data.id)}
           />
         ) : (

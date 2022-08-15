@@ -12,9 +12,9 @@ import { GetServerSideProps } from "next";
 import { Cart } from "../../types/cart";
 //style
 import styles from "../../styles/page/Courses.module.scss";
-//fetch data
-import { cartData as courses } from "../../fakeData/cartData";
+//data
 import { blurData } from "../../utils/blurImagePlaceholder";
+import { cartData as courses } from "../../fakeData/cartData";
 
 const Courses = ({courses}:{courses: Cart[]}) => {
   return (

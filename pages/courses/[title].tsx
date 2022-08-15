@@ -1,3 +1,4 @@
+import { ToastContainer, toast } from 'react-toastify';
 //types
 import { GetServerSideProps } from "next";
 import { Cart } from "../../types/cart";
@@ -12,12 +13,19 @@ import { FaLock, FaMoneyBillWave, FaYoutube } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
 //styles
 import styles from "../../styles/page/CourseDetail.module.scss";
+import 'react-toastify/dist/ReactToastify.min.css';
 //data
 import { cartData } from "../../fakeData/cartData";
 import { blurData } from "../../utils/blurImagePlaceholder";
 
 const CourseDetail = ({ course }: { course: Cart }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();  
+  const addNotify = () => toast.success(`دوره ${course.title} به سبد خرید اضافه شد`);
+
+  const handleAdd = () => {
+    dispatch(addToCart(course));
+    addNotify();
+  }
   return (
     <Layout description={course.body.slice(0, 80)} title={course.title}>
       <main>
@@ -49,9 +57,9 @@ const CourseDetail = ({ course }: { course: Cart }) => {
                   <h3>مبلغ: {course.price.toLocaleString()} تومان</h3>
                   <FaMoneyBillWave className={styles.icon} />
                 </div>
-                <button className={`${styles.btn} btn`} onClick={() => dispatch(addToCart(course))}>ثبت نام در دوره</button>
+                <button className={`${styles.btn} btn`} onClick={handleAdd}>ثبت نام در دوره</button>
                 <p className={styles.videoCount}>
-                  این دوره شامل 10 ویدئو میباشد
+                  <>این دوره شامل {course?.courseList?.length} ویدئو میباشد</>
                 </p>
               </div>
               <div className={styles.videoList}>
@@ -60,47 +68,14 @@ const CourseDetail = ({ course }: { course: Cart }) => {
                     لیست ویدئو ها <IoMdArrowDropdown className={styles.icon} />
                   </summary>
                   <ul className={styles.ulVideo}>
-                    <li className={styles.item}>
-                      <span className={styles.number}>1</span>
-                      <FaYoutube className={styles.youtubeIcon} /> ویدئو شماره
-                      یک <span className={styles.time}>35 : 12</span>{" "}
-                      <FaLock className={styles.lockIcon} />
-                    </li>
-
-                    <li className={styles.item}>
-                      <span className={styles.number}>1</span>
-                      <FaYoutube className={styles.youtubeIcon} /> ویدئو شماره
-                      یک <span className={styles.time}>35 : 12</span>{" "}
-                      <FaLock className={styles.lockIcon} />
-                    </li>
-
-                    <li className={styles.item}>
-                      <span className={styles.number}>1</span>
-                      <FaYoutube className={styles.youtubeIcon} /> ویدئو شماره
-                      یک <span className={styles.time}>35 : 12</span>{" "}
-                      <FaLock className={styles.lockIcon} />
-                    </li>
-
-                    <li className={styles.item}>
-                      <span className={styles.number}>1</span>
-                      <FaYoutube className={styles.youtubeIcon} /> ویدئو شماره
-                      یک <span className={styles.time}>35 : 12</span>{" "}
-                      <FaLock className={styles.lockIcon} />
-                    </li>
-
-                    <li className={styles.item}>
-                      <span className={styles.number}>1</span>
-                      <FaYoutube className={styles.youtubeIcon} /> ویدئو شماره
-                      یک <span className={styles.time}>35 : 12</span>{" "}
-                      <FaLock className={styles.lockIcon} />
-                    </li>
-
-                    <li className={styles.item}>
-                      <span className={styles.number}>1</span>
-                      <FaYoutube className={styles.youtubeIcon} /> ویدئو شماره
-                      یک <span className={styles.time}>35 : 12</span>{" "}
-                      <FaLock className={styles.lockIcon} />
-                    </li>
+                    {course?.courseList?.map((list) => (
+                      <li className={styles.item} key={list.id}>
+                        <span className={styles.number}>{list.number}</span>
+                        <FaYoutube className={styles.youtubeIcon} /> {list.title.slice(0, 20)} 
+                        <span className={styles.time}>{list.time}</span>{" "}
+                        {list.isLock && <FaLock className={styles.lockIcon} />}
+                      </li>
+                    ))}
                   </ul>
                 </details>
               </div>
@@ -112,6 +87,7 @@ const CourseDetail = ({ course }: { course: Cart }) => {
           </div>
         </Section>
       </main>
+      <ToastContainer />
     </Layout>
   );
 };
@@ -119,8 +95,7 @@ const CourseDetail = ({ course }: { course: Cart }) => {
 export default CourseDetail;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const course = cartData.filter((i) => i.title === params?.title)[0];
-
+  const course = cartData.filter((i) => i.title === params?.title)[0];  
   return {
     props: {
       course,

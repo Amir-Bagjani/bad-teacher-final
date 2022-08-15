@@ -69,11 +69,11 @@ export const useAuthIsReady = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const controller = new AbortController();
     const token = Cookies.get("token");
     if (token) {
       const refresh = async () => {
-        const res = await request({ url: "/me"});
-        console.log(res.data);
+        const res = await request({ url: "/me", signal: controller.signal});
         dispatch( authIsReady(res.data));
       };
       refresh();

@@ -8,7 +8,7 @@ import {
 } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 //redux
 import { cartSelect, UserSelect } from "../redux/store";
 import { useSelector } from "react-redux";
@@ -62,10 +62,6 @@ const Navbar = () => {
     if (e.target === e.currentTarget) closeMenuState();
   }, [closeMenuState]);
 
-  const routerPush = useCallback(() => {
-    router.push({pathname: '/login', query: { from: router.pathname }})
-  }, [router]);
-
   //close menu when location change
   useEffect(() => {
     closeMenuState();
@@ -79,7 +75,6 @@ const Navbar = () => {
   }, [closeMenuState]);
 
   if(!userIsReady) return null;
-
 
   return (
     <header
@@ -142,13 +137,6 @@ const Navbar = () => {
             </div>
             <p>آکادمی Bad Teacher</p>
           </li>
-          <li className={styles.navbarCart}>
-            <Link href="/cart">
-              <a>
-                <MdOutlineShoppingCart className={styles.icon} /> سبد خرید
-              </a>
-            </Link>
-          </li>
           <li>
             <Link href="/">
               <a>
@@ -163,13 +151,13 @@ const Navbar = () => {
               </a>
             </Link>
           </li>
-          <li>
-            <Link href="/courses/34">
+          {!user && <li className={styles.navbarCart}>
+            <Link href="/cart">
               <a>
-                <AiOutlineYoutube className={styles.icon} /> کانال یوتیوب
+                <MdOutlineShoppingCart className={styles.icon} /> سبد خرید
               </a>
             </Link>
-          </li>
+          </li>}
           <li>
             <Link href="/courses">
               <a>
@@ -204,8 +192,8 @@ const Navbar = () => {
 
       {!user && (
         <>
-          <a className={styles.navbarLogin} onClick={routerPush}>ورود / ثبت نام</a>
-          <a className={styles.navbarLoginMobile} onClick={routerPush}>
+          <a className={styles.navbarLogin} onClick={() => router.push(`/login?redirect=${router.asPath}`)}>ورود / ثبت نام</a>
+          <a className={styles.navbarLoginMobile} onClick={() => router.push(`/login?redirect=${router.asPath}`)}>
             <BiUser className={styles.icon} />
           </a>
         </>
@@ -244,7 +232,6 @@ const Icons = (props: IconProps) => {
   const { user } = useSelector(UserSelect);
   const { logout } = useLogout();
 
-  
   //prevent hydration
   const [hydrationQuantity, setQuantity] = useState(0);
   //prevent hydration
@@ -298,7 +285,7 @@ const Icons = (props: IconProps) => {
                   </>)} <br /> {user?.nationalFormatPhone}
                 </span>
               </li>
-              <li onClick={logout}>
+              <li>
                 <Link href="/profile">
                   <a>
                     <AiOutlineBank className={styles.icon} />{" "}
@@ -315,12 +302,10 @@ const Icons = (props: IconProps) => {
                 </Link>
               </li>
               <li onClick={logout}>
-                <Link href="">
-                  <a>
-                    <MdLogout className={styles.icon} />{" "}
-                    <span>خروج از حساب کاربری</span>
-                  </a>
-                </Link>
+                <a>
+                  <MdLogout className={styles.icon} />{" "}
+                  <span>خروج از حساب کاربری</span>
+                </a>
               </li>
             </ul>
           )}

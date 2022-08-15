@@ -103,6 +103,7 @@ a {
 }
 .btn {
   font-family: var(--font-family);
+  cursor: pointer;
   border-radius: 24px;
   text-align: center;
   padding: 10px 32px;
@@ -125,6 +126,13 @@ a {
 ::-webkit-scrollbar-thumb {
   background: var(--font-color);
   border-radius: 1rem;
+}
+
+//react-toastify
+.Toastify__toast-body {
+  font-family: var(--font-family);
+  direction: rtl;
+  font-size: 1.3rem;
 }
 
 //media queries

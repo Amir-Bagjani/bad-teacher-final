@@ -1,6 +1,7 @@
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { getSession } from "../utils/getSession";
+import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+// import { GetServerSideProps, GetServerSidePropsContext } from "next";
+// import { getSession } from "../utils/getSession";
 
 //component
 import Image from "next/image";
@@ -13,7 +14,7 @@ import { BsCheck2Circle } from "react-icons/bs";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { cartSelect } from "../redux/store";
+import { cartSelect, UserSelect } from "../redux/store";
 import { removeFromCart } from "../redux/cartSlice";
 
 //style
@@ -23,7 +24,18 @@ const discount = 5;
 
 const Cart = () => {
   const { cart, quantity, total } = useSelector(cartSelect);
+  const { user } = useSelector(UserSelect);
   const dispatch = useDispatch()
+  const router = useRouter();
+
+  const handlePayment = () => {
+    if(user){
+      // Router.push("the route which comes from backend")
+      console.log("the route which comes from backend");
+    }else{
+      router.push("login?redirect=/cart")
+    }
+  }
 
   return (
     <Layout title="سبد خرید">
@@ -92,7 +104,7 @@ const Cart = () => {
                 جمع سبد خرید :{" "}
                 <span>{(total * (1 - discount / 100)).toLocaleString()}</span>
               </p>
-              <a href="#" className="btn">
+              <a onClick={handlePayment} className="btn">
                 ادامه سفارش
               </a>
             </div>
@@ -105,22 +117,22 @@ const Cart = () => {
 
 export default dynamic(() => Promise.resolve(Cart), {ssr: false});
 
-export const getServerSideProps: GetServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  const auth = await getSession(context);
+// export const getServerSideProps: GetServerSideProps = async (
+//   context: GetServerSidePropsContext
+// ) => {
+//   const auth = await getSession(context);
 
-  if (!auth) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  } else {
-    return {
-      props: {
-      },
-    };
-  }
-};
+//   if (!auth) {
+//     return {
+//       redirect: {
+//         destination: "/",
+//         permanent: false,
+//       },
+//     };
+//   } else {
+//     return {
+//       props: {
+//       },
+//     };
+//   }
+// };
